@@ -1,9 +1,10 @@
 import React from 'react';
+import HomePage from '../pages/HomePage/HomePage';
 import styles from './App.module.css';
 
 const App = () => (
   <div className={styles.App}>
-		<h1>hello</h1>
+		<HomePage />
   </div>
 )
 
