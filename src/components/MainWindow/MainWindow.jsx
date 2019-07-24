@@ -8,7 +8,7 @@ const MainWindow = () => (
   <div className={styles.MainWindow}>
     <Switch>
       <Route exact path='/login' render={() => <LoginPage />} />
-      <Route exact path='/signup' render={() => <SignupPage />} />
+      <Route exact path='/signup' render={({ history }) => <SignupPage history={history} />} />
     </Switch>
   </div>
 )
