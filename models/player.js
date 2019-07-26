@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 7;
 
 const playerSchema = new mongoose.Schema({
-  username: {type: String, required: true},
+  username: {type: String, required: true, unique: true},
   password: String
 }, {
   timestamps: true
