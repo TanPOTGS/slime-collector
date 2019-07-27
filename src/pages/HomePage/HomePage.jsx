@@ -15,6 +15,15 @@ const HomePage = (props) => {
 		>
 			<span className={styles.LogoutTitle}>Logout</span>
 		</NavLink>
+
+		<NavLink 
+		exact 
+		to='/howto' 
+		className={styles.HowtoNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.HowtoTitle}>How To Play</span>
+		</NavLink>
 	</nav>
 	:
 	<nav className={styles.MainNavbarLogedOut}>
@@ -34,6 +43,15 @@ const HomePage = (props) => {
 		activeClassName={styles.NavLinkCurrent}
 		>
 			<span className={styles.SignupTitle}>New Game</span>
+		</NavLink>
+
+		<NavLink 
+		exact 
+		to='/howto' 
+		className={styles.HowtoNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.HowtoTitle}>How To Play</span>
 		</NavLink>
 	</nav>
 	;

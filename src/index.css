@@ -1,4 +1,12 @@
+@font-face {
+	font-family: 'PKMN RBYGSC';
+	font-style: normal;
+	src: url('fonts/PKMN-RBYGSC.ttf');
+	font-display: swap;
+}
+
 body {
 	margin: 0;
 	padding: 0;
+  font-family: 'PKMN RBYGSC', sans-serif;
 }
