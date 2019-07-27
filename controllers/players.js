@@ -4,7 +4,9 @@ const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
 module.exports = {
-  signup
+	signup,
+	createJWT,
+	login
 };
 
 async function signup(req, res) {
@@ -29,10 +31,27 @@ async function signup(req, res) {
 //This function will use the sign method from
 //the jwt library to create the token. This function
 //will be called when the player signs up or logs in.
-function createJWT(user) {
+function createJWT(player) {
   return jwt.sign(
-    {user}, // data payload
+    {player}, // data payload
     SECRET,
     {expiresIn: '24h'}
   );
+}
+
+async function login(req, res) {
+  try {
+    const player = await Player.findOne({username: req.body.username});
+    if (!player) return res.status(401).json({err: 'bad credentials'});
+    player.comparePassword(req.body.password, (err, isMatch) => {
+      if (isMatch) {
+        const token = createJWT(player);
+        res.json({token});
+      } else {
+        return res.status(401).json({err: 'bad credentials'});
+      }
+    });
+  } catch (err) {
+    return res.status(401).json(err);
+  }
 }

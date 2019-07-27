@@ -34,4 +34,13 @@ playerSchema.pre('save', function(next) {
   });
 });
 
+playerSchema.methods.comparePassword = function(tryPassword, cb) {
+  // 'this' represents the document that you called comparePassword on
+  bcrypt.compare(tryPassword, this.password, function(err, isMatch) {
+    if (err) return cb(err);
+    cb(null, isMatch);
+  });
+};
+
+
 module.exports = mongoose.model('Player', playerSchema);

@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import LoginForm from '../../components/LoginForm/LoginForm';
 import styles from './LoginPage.module.css';
 
-const LoginPage = () => (
-  <div className={styles.LoginPage}>
-		<NavLink exact to='/' className={styles.HomeNavLink}>
-			<span className={styles.Close}>&times;</span>
-		</NavLink>
-    <h1>Login Here</h1>
-  </div>
-)
+class LoginPage extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {message: ''}
+	}
+
+	updateMessage = (msg) => {
+		this.setState({message: msg});
+	}
+
+	render() {
+		return (
+			<div className={styles.LoginPage}>
+				<NavLink exact to='/' className={styles.HomeNavLink}>
+					<span className={styles.Close}>&times;</span>
+				</NavLink>
+				<LoginForm {...this.props} updateMessage={this.updateMessage} />
+        <p>{this.state.message}</p>
+			</div>
+		);
+	}
+};
 
 export default LoginPage;

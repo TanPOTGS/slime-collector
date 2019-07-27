@@ -19,7 +19,8 @@ class SignupForm extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await playerService.signup(this.state);
+			await playerService.signup(this.state);
+			this.props.handleSignupOrLogin();
       // Successfully signed up - show GamePage
       this.props.history.push('/');
     } catch (err) {
@@ -36,9 +37,9 @@ class SignupForm extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} >
-          <input type="text" placeholder="Username" value={this.state.username} name="username" onChange={this.handleChange} />
-          <input type="password" placeholder="Password" value={this.state.password} name="password" onChange={this.handleChange} />
-          <input type="password" placeholder="Confirm Password" value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
+          <input type="text" placeholder="Username" autoComplete='off' value={this.state.username} name="username" onChange={this.handleChange} />
+          <input type="password" placeholder="Password" autoComplete='off' value={this.state.password} name="password" onChange={this.handleChange} />
+          <input type="password" placeholder="Confirm Password" autoComplete='off' value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
           <button disabled={this.isFormInvalid()}>Sign Up</button>
         </form>
       </div>
