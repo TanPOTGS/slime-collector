@@ -2,9 +2,38 @@
 	display: flex;
 	flex-direction: column;
 	border: 10px double black;
+	width: 10%;
+	padding: 1% 3% .5% 2%;
 }
 .MainNavbarLoggedIn {
 	display: flex;
 	flex-direction: column;
 	border: 10px double black;
+	width: 10%;
+	padding: 1% 3% .5% 2%;
+}
+
+.LoginNavLink {
+	text-decoration: none;
+	width: fit-content;
+	margin: 6% 0;
+	color: black;
+}
+.LogoutNavLink {
+	text-decoration: none;
+	width: fit-content;
+	margin: 6% 0;
+	color: black;
+}
+.SignupNavLink {
+	text-decoration: none;
+	width: fit-content;
+	margin: 6% 0;
+	color: black;
+}
+.HowtoNavLink {
+	text-decoration: none;
+	width: fit-content;
+	margin: 6% 0;
+	color: black;
 }

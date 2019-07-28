@@ -39,7 +39,7 @@ const HomePage = (props) => {
 		<NavLink
 		exact 
 		to='/signup' 
-		className={styles.SignupNavlink} 
+		className={styles.SignupNavLink} 
 		activeClassName={styles.NavLinkCurrent}
 		>
 			<span className={styles.SignupTitle}>New Game</span>
