@@ -1,21 +1,10 @@
-.HomePage {
-	
+.MainNavbarLoggedOut {
+	display: flex;
+	flex-direction: column;
+	border: 10px double black;
 }
-.MainNavbar {
-
-}
-.LoginNavLink {
-
-}
-.LoginTitle {
-
-}
-.SignupNavLink {
-
-}
-.SignupTitle {
-	
-}
-.NavLinkCurrent {
-
+.MainNavbarLoggedIn {
+	display: flex;
+	flex-direction: column;
+	border: 10px double black;
 }

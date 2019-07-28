@@ -6,7 +6,7 @@ import styles from './HomePage.module.css';
 const HomePage = (props) => {
 	
 	let nav = props.player ?
-	<nav className={styles.MainNavbarLogedIn}>
+	<nav className={styles.MainNavbarLoggedIn}>
 		<NavLink 
 		exact 
 		to='/' 
@@ -26,7 +26,7 @@ const HomePage = (props) => {
 		</NavLink>
 	</nav>
 	:
-	<nav className={styles.MainNavbarLogedOut}>
+	<nav className={styles.MainNavbarLoggedOut}>
 		<NavLink 
 		exact 
 		to='/login' 
