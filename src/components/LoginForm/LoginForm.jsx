@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import playerService from '../../utilities/playerService';
+import styles from './LoginForm.module.css';
 
 class LoginForm extends Component {
 
@@ -27,10 +28,36 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form autoComplete='off' onSubmit={this.handleSubmit}>
-          <input type='text' placeholder="Username" autoComplete='off' value={this.state.username} name='username'onChange={this.handleChange} />
-          <input type='password' placeholder="Password" autoComplete='off' value={this.state.password} name='password' onChange={this.handleChange} />
-        <button>Enter</button>
+      <form className={styles.LoginForm} autoComplete='off'>
+
+				<div className={styles.FormLable}>
+					<span>Username:</span>
+					
+					<input 
+					className={styles.FormInput}
+					type='text'
+					autoComplete='off'
+					value={this.state.username}
+					name='username'
+					onChange={this.handleChange}
+					/>
+				</div>
+
+				<div className={styles.FormLable}>
+					<span>Password:</span>
+
+					<input 
+					className={styles.FormInput}
+					type='password'
+					autoComplete='off'
+					value={this.state.password}
+					name='password'
+					onChange={this.handleChange}
+					/>
+				</div>
+
+        <span className={styles.FormButton} onClick={this.handleSubmit}>Enter</span>
+
       </form>
     );
   }

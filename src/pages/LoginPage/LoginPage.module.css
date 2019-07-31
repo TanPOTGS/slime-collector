@@ -1,0 +1,22 @@
+.LoginPage {
+	display: flex;
+	position: relative;
+	flex-direction: column;
+	width: fit-content;
+	border: 10px double black;
+	padding: 3% 3% .5% 2%;
+}
+.HomeNavlink {
+	position: absolute;
+	right: 1%;
+	top: 1%;
+	width: fit-content;
+	align-self: flex-end;
+	text-decoration: none;
+	color: black;
+}
+.ErrorMsg {
+	display: inline;
+	margin: 0;
+	align-self: center;
+}

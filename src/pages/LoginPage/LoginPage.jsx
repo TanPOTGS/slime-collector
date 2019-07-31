@@ -16,11 +16,11 @@ class LoginPage extends Component {
 	render() {
 		return (
 			<div className={styles.LoginPage}>
-				<NavLink exact to='/' className={styles.HomeNavLink}>
-					<span className={styles.Close}>&times;</span>
+				<NavLink exact to='/' className={styles.HomeNavlink}>
+					<span>&times;</span>
 				</NavLink>
 				<LoginForm {...this.props} updateMessage={this.updateMessage} />
-        <p>{this.state.message}</p>
+        <p className={styles.ErrorMsg}>{this.state.message}</p>
 			</div>
 		);
 	}

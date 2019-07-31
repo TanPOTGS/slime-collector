@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import playerService from '../../utilities/playerService';
+import styles from './SignupForm.module.css';
 
 class SignupForm extends Component {
 
@@ -30,17 +31,54 @@ class SignupForm extends Component {
   }
 
   isFormInvalid() {
-    return !(this.state.username && this.state.password === this.state.passwordConf);
+    return !(this.state.username && this.state.password === this.state.passwordConf && this.state.password !== '');
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} >
-          <input type="text" placeholder="Username" autoComplete='off' value={this.state.username} name="username" onChange={this.handleChange} />
-          <input type="password" placeholder="Password" autoComplete='off' value={this.state.password} name="password" onChange={this.handleChange} />
-          <input type="password" placeholder="Confirm Password" autoComplete='off' value={this.state.passwordConf} name="passwordConf" onChange={this.handleChange} />
-          <button disabled={this.isFormInvalid()}>Sign Up</button>
+        <form className={styles.SignupForm} onSubmit={this.handleSubmit} >
+					
+					<div className={styles.FormLable}>
+						<span>Username:</span>
+
+						<input
+						className={styles.FormInput}
+						type="text"
+						autoComplete='off'
+						value={this.state.username}
+						name="username"
+						onChange={this.handleChange}
+						/>
+					</div>
+
+					<div className={styles.FormLable}>
+						<span>Password:</span>
+
+						<input
+						className={styles.FormInput}
+						type="password"
+						autoComplete='off'
+						value={this.state.password}
+						name="password"
+						onChange={this.handleChange}
+						/>
+					</div>
+
+					<div className={styles.FormLable}>
+						<span>Confirm Password:</span>
+
+						<input
+						className={styles.FormInput}
+						type="password"
+						autoComplete='off'
+						value={this.state.passwordConf}
+						name="passwordConf"
+						onChange={this.handleChange}
+						/>
+					</div>
+
+          <button className={styles.FormButton} disabled={this.isFormInvalid()}>Sign Up</button>
         </form>
       </div>
     );
