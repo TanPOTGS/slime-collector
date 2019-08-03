@@ -1,12 +1,8 @@
-.SignupPage {
-	display: flex;
+.World3Container {
 	position: relative;
-	flex-direction: column;
-	width: fit-content;
 	border: 10px double black;
-	padding: 3% 3% .5% 2%;
 }
-.HomeNavLink {
+.BackToHarvestPage {
 	position: absolute;
 	right: 1%;
 	top: 1%;
@@ -15,8 +11,7 @@
 	text-decoration: none;
 	color: black;
 }
-.ErrorMsg {
-	display: inline;
-	margin: 0;
-	align-self: center;
+.World3 {
+	border: 10px double black;
+	margin: 20px;
 }

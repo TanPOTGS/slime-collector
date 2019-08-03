@@ -16,7 +16,7 @@ class LoginPage extends Component {
 	render() {
 		return (
 			<div className={styles.LoginPage}>
-				<NavLink exact to='/' className={styles.HomeNavlink}>
+				<NavLink exact to='/' className={styles.HomeNavLink}>
 					<span>&times;</span>
 				</NavLink>
 				<LoginForm {...this.props} updateMessage={this.updateMessage} />

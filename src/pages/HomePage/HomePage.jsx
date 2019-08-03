@@ -7,14 +7,6 @@ const HomePage = (props) => {
 	
 	let nav = props.player ?
 	<nav className={styles.MainNavbarLoggedIn}>
-		<NavLink 
-		exact 
-		to='/' 
-		className={styles.LogoutNavLink} 
-		onClick={props.handleLogout}
-		>
-			<span className={styles.LogoutTitle}>Logout</span>
-		</NavLink>
 
 		<NavLink 
 		exact 
@@ -22,18 +14,47 @@ const HomePage = (props) => {
 		className={styles.HowtoNavLink} 
 		activeClassName={styles.NavLinkCurrent}
 		>
-			<span className={styles.HowtoTitle}>How To Play</span>
+			<span className={styles.HowToPlayLinkSpan}>How To Play</span>
 		</NavLink>
+
+		<NavLink 
+		exact 
+		to='/harvest' 
+		className={styles.HarvestNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.HarvestLinkSpan}>Harvest</span>
+		</NavLink>
+
+		<NavLink 
+		exact 
+		to='/' 
+		className={styles.LogoutNavLink} 
+		onClick={props.handleLogout}
+		>
+			<span className={styles.LogoutLinkSpan}>Logout</span>
+		</NavLink>
+
 	</nav>
 	:
 	<nav className={styles.MainNavbarLoggedOut}>
+
+		<NavLink 
+		exact 
+		to='/howto' 
+		className={styles.HowtoNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.HowToPlayLinkSpan}>How To Play</span>
+		</NavLink>
+
 		<NavLink 
 		exact 
 		to='/login' 
 		className={styles.LoginNavLink} 
 		activeClassName={styles.NavLinkCurrent}
 		>
-			<span className={styles.LoginTitle}>Continue</span>
+			<span className={styles.LoginLinkSpan}>Continue</span>
 		</NavLink>
 
 		<NavLink
@@ -42,17 +63,9 @@ const HomePage = (props) => {
 		className={styles.SignupNavLink} 
 		activeClassName={styles.NavLinkCurrent}
 		>
-			<span className={styles.SignupTitle}>New Game</span>
+			<span className={styles.SignupLinkSpan}>New Game</span>
 		</NavLink>
 
-		<NavLink 
-		exact 
-		to='/howto' 
-		className={styles.HowtoNavLink} 
-		activeClassName={styles.NavLinkCurrent}
-		>
-			<span className={styles.HowtoTitle}>How To Play</span>
-		</NavLink>
 	</nav>
 	;
 

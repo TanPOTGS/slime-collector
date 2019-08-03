@@ -16,7 +16,7 @@ class SignupPage extends Component {
 	render() {
 		return (
 			<div className={styles.SignupPage}>
-				<NavLink exact to='/' className={styles.HomeNavlink}>
+				<NavLink exact to='/' className={styles.HomeNavLink}>
 					<span className={styles.Close}>&times;</span>
 				</NavLink>
 				<SignupForm {...this.props} updateMessage={this.updateMessage} />

@@ -17,6 +17,12 @@
 	padding: 1% 3% .5% 2%;
 }
 
+.HowtoNavLink {
+	text-decoration: none;
+	width: fit-content;
+	margin: 6% 0;
+	color: black;
+}
 .LoginNavLink {
 	text-decoration: none;
 	width: fit-content;
@@ -35,7 +41,7 @@
 	margin: 6% 0;
 	color: black;
 }
-.HowtoNavLink {
+.HarvestNavLink {
 	text-decoration: none;
 	width: fit-content;
 	margin: 6% 0;

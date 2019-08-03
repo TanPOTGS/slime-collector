@@ -4,8 +4,8 @@ import styles from './HowtoPage.module.css';
 
 const HowtoPage = () => (
 	<div className={styles.HowtoPage}>
-		<NavLink exact to='/'>
-			<span>&times;</span>
+		<NavLink exact to='/' className={styles.HomeNavLink}>
+			<span className={styles.Close}>&times;</span>
 		</NavLink>
 		<h1>THE BASIC RULES OF THE GAME:</h1>
 		<p>
