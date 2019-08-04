@@ -1,19 +1,21 @@
 .HomePage {
-	
+	display: flex;
+	align-items: flex-start;
+	height: 100%;
 }
 
 .MainNavbarLoggedOut {
 	display: flex;
 	flex-direction: column;
 	border: 10px double black;
-	width: 138px;
+	min-width: 138px;
 	padding: 1% 3% .5% 2%;
 }
 .MainNavbarLoggedIn {
 	display: flex;
 	flex-direction: column;
 	border: 10px double black;
-	width: 138px;
+	min-width: 138px;
 	padding: 1% 3% .5% 2%;
 }
 

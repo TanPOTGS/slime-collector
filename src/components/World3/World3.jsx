@@ -12,7 +12,7 @@ const World3 = () => (
 			<span className={styles.Close}>&times;</span>
 		</NavLink>
 		<div className={styles.World3}>
-			<h1>World 3</h1>
+			
 		</div>
 	</div>
 )

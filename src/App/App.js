@@ -7,7 +7,7 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			player: null
+			player: ''
 		}
 	}
 
@@ -17,7 +17,7 @@ class App extends Component {
 
   handleLogout = () => {
     playerService.logout();
-    this.setState({ player: null });
+    this.setState({ player: '' });
   }
 
   async componentDidMount() {

@@ -1,11 +1,12 @@
 .World3Container {
 	position: relative;
 	border: 10px double black;
+	height: 97%;
 }
 .BackToHarvestPage {
 	position: absolute;
-	right: 1%;
-	top: 1%;
+	right: 3px;
+	top: 0px;
 	width: fit-content;
 	align-self: flex-end;
 	text-decoration: none;
@@ -14,4 +15,5 @@
 .World3 {
 	border: 10px double black;
 	margin: 20px;
+	height: 90.5%;
 }
