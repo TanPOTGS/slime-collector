@@ -13,7 +13,14 @@
 	color: black;
 }
 .World1 {
+	position: relative;
 	border: 10px double black;
 	margin: 20px;
 	height: 90.5%;
+}
+.PlayerBlock {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	background-color: blue;
 }
