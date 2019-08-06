@@ -1,7 +1,7 @@
 .World1Container {
 	position: relative;
 	border: 10px double black;
-	height: 97%;
+	width: fit-content;
 }
 .BackToHarvestPage {
 	position: absolute;
@@ -16,7 +16,8 @@
 	position: relative;
 	border: 10px double black;
 	margin: 20px;
-	height: 90.5%;
+	height: 500px;
+	width: 500px;
 }
 .PlayerBlock {
 	position: absolute;

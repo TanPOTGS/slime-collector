@@ -6,17 +6,43 @@ class World1 extends Component {
 
 	state ={
 		playerX: 0,
-		playerY: 0
+		playerY: 0,
 	}
 
 	componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyPress);
+		document.addEventListener('keydown', this.handleKeyPress);
+	}
+
+	componentDidUpdate() {
+    this.handleMapBoundries();
   }
 
 	componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyPress);
 	}
 	
+	handleMapBoundries() {
+    if (this.state.playerY < 0) {
+      this.setState({
+        playerY: this.state.playerY + 1
+      })
+    } else if (this.state.playerY > 96) {
+      this.setState({
+        playerY: this.state.playerY - 1
+      })
+    }
+
+    if (this.state.playerX < 0) {
+      this.setState({
+        playerX: this.state.playerX + 1
+      })
+    } else if (this.state.playerX > 96) {
+      this.setState({
+        playerX: this.state.playerX - 1
+      })
+    }
+  }
+
 	handleKeyPress = (e) => {
     switch(e.keyCode) {
       case 37:
@@ -36,12 +62,12 @@ class World1 extends Component {
       break;
       case 40:
       this.setState({
-        playerY: this.state.playerY + 2
-      });
+				playerY: this.state.playerY + 2
+			});
       break;
       default:
     }
-  }
+	}
 
 	render() {
 
