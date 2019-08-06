@@ -25,3 +25,11 @@
 	height: 20px;
 	background-color: blue;
 }
+.Monster1,
+.Monster2,
+.Monster3 {
+	position: absolute;
+	background-color: red;
+	width: 40px;
+	height: 40px;
+}
