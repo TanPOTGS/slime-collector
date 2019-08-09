@@ -6,8 +6,8 @@ import styles from './World1.module.css';
 class World1 extends Component {
 
 	state ={
-		playerX: 0,
-		playerY: 0
+		playerXPos: 0,
+		playerYPos: 0
 	}
 
 	componentDidMount() {
@@ -24,23 +24,23 @@ class World1 extends Component {
 	
 	handleMapBoundries() {
 		//Handles player's map boundries on the X axis
-		if (this.state.playerX < 0) {
+		if (this.state.playerXPos < 0) {
 			this.setState({
-				playerX: this.state.playerX + 1
+				playerXPos: this.state.playerXPos + 1
 			})
-		} else if (this.state.playerX > 96) {
+		} else if (this.state.playerXPos > 96) {
 			this.setState({
-				playerX: this.state.playerX - 1
+				playerXPos: this.state.playerXPos - 1
 			})
 		}
 		//Handles player's map boundries on the Y axis
-    if (this.state.playerY < 0) {
+    if (this.state.playerYPos < 0) {
       this.setState({
-        playerY: this.state.playerY + 1
+        playerYPos: this.state.playerYPos + 1
       })
-    } else if (this.state.playerY > 96) {
+    } else if (this.state.playerYPos > 96) {
       this.setState({
-        playerY: this.state.playerY - 1
+        playerYPos: this.state.playerYPos - 1
       })
     }
   }
@@ -49,22 +49,22 @@ class World1 extends Component {
     switch(e.keyCode) {
       case 37:
       this.setState({
-        playerX: this.state.playerX - 2
+        playerXPos: this.state.playerXPos - 2
       });
       break;
       case 39:
       this.setState({
-        playerX: this.state.playerX + 2
+        playerXPos: this.state.playerXPos + 2
       });
       break;
       case 38:
       this.setState({
-        playerY: this.state.playerY - 2
+        playerYPos: this.state.playerYPos - 2
       });
       break;
       case 40:
       this.setState({
-				playerY: this.state.playerY + 2
+				playerYPos: this.state.playerYPos + 2
 			});
       break;
       default:
@@ -73,9 +73,9 @@ class World1 extends Component {
 
 	render() {
 
-		let playerPos = {
-			left: `${this.state.playerX}%`,
-			top: `${this.state.playerY}%`,
+		let playerCoordinates = {
+			left: `${this.state.playerXPos}%`,
+			top: `${this.state.playerYPos}%`,
 		}
 
 		return (
@@ -90,10 +90,10 @@ class World1 extends Component {
 				</NavLink>
 
 				<div className={styles.World1}>
-					<div className={styles.PlayerBlock} style={playerPos}></div>
-					<Monster playerXPos={this.state.playerX} playerYPos={this.state.playerY} color={'red'}/>
-					<Monster playerXPos={this.state.playerX} playerYPos={this.state.playerY} color={'blue'}/>
-					<Monster playerXPos={this.state.playerX} playerYPos={this.state.playerY} color={'yellow'}/>
+					<div className={styles.PlayerBlock} style={playerCoordinates}></div>
+					<Monster playerXPos={this.state.playerXPos} playerYPos={this.state.playerYPos} color={'red'}/>
+					<Monster playerXPos={this.state.playerXPos} playerYPos={this.state.playerYPos} color={'blue'}/>
+					<Monster playerXPos={this.state.playerXPos} playerYPos={this.state.playerYPos} color={'yellow'}/>
 				</div>
 
 			</div>

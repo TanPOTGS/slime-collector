@@ -4,8 +4,8 @@ import styles from './Monster.module.css';
 class Monster extends Component {
 
 	state = {
-		x: '',
-		y: '',
+		monsterXPos: '',
+		monsterYPos: '',
 		w: 20,
 		h: 20,
 		isColliding: false
@@ -22,8 +22,8 @@ class Monster extends Component {
 
 	getInitialPos() {
 		this.setState({
-			x: this.getRandomEvenNumber(),
-			y: this.getRandomEvenNumber()
+			monsterXPos: this.getRandomEvenNumber(),
+			monsterYPos: this.getRandomEvenNumber()
 		});
 	}
 
@@ -37,41 +37,51 @@ class Monster extends Component {
 		}
 	}
 
-	handleCollisionWithPlayer() {
-		let centerX = this.state.x + 1;
-		let centerY = this.state.y + 1;
-
-		console.log(`x: ${centerX} || y: ${centerY}`);
-	}
-
 	handleMapBoundries() {
 		//Handles monster's map boundries on the X axis
-		if (this.state.x < 0) {
+		if (this.state.monsterXPos < 0) {
 			this.setState({
-				x: this.state.x + 1
+				monsterXPos: this.state.monsterXPos + 1
 			})
-		} else if (this.state.x > 96) {
+		} else if (this.state.monsterXPos > 96) {
 			this.setState({
-				x: this.state.x - 1
+				monsterXPos: this.state.monsterXPos - 1
 			})
 		}
 		///Handles monster's map boundries on the Y axis
-    if (this.state.y < 0) {
+    if (this.state.monsterYPos < 0) {
       this.setState({
-        y: this.state.y + 1
+        monsterYPos: this.state.monsterYPos + 1
       })
-    } else if (this.state.y > 96) {
+    } else if (this.state.monsterYPos > 96) {
       this.setState({
-        y: this.state.y - 1
+        monsterYPos: this.state.monsterYPos - 1
       })
     }
+	}
+
+	handleCollisionWithPlayer() {
+		let monsterCenX = this.state.monsterXPos + 1;
+		let monsterCenY = this.state.monsterYPos + 1;
+	
+		let playerCenX = this.props.playerXPos + 1;
+		let playerCenY = this.props.playerYPos + 1;
+	
+		let xDistance = Math.abs(monsterCenX - playerCenX);
+		let yDistance = Math.abs(monsterCenY - playerCenY);
+	
+		if ((xDistance > 4 || yDistance > 4) && this.state.isColliding !== false) {
+			this.setState({isColliding: false});
+		} else if (xDistance <= 4 && yDistance <= 4 && this.state.isColliding !== true) {
+			this.setState({isColliding: true});
+		}
 	}
 
 	render() {
 
 		let monsterPosAndDim = {
-			left: `${this.state.x}%`,
-			top: `${this.state.y}%`,
+			left: `${this.state.monsterXPos}%`,
+			top: `${this.state.monsterYPos}%`,
 			width: `${this.state.w}px`,
 			height: `${this.state.h}px`,
 			backgroundColor: this.props.color
