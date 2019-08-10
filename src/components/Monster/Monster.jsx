@@ -8,7 +8,8 @@ class Monster extends Component {
 		monsterYPos: '',
 		w: 20,
 		h: 20,
-		isColliding: false
+		isColliding: false,
+		backgroundColor: this.props.color //this is here for a collision detection test
 	}
 
 	componentDidMount() {
@@ -18,6 +19,7 @@ class Monster extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleCollisionWithPlayer();
+		this.handleColorChange(); //this is here for a collision detection test
 	}
 
 	getInitialPos() {
@@ -72,8 +74,21 @@ class Monster extends Component {
 	
 		if ((xDistance > 4 || yDistance > 4) && this.state.isColliding !== false) {
 			this.setState({isColliding: false});
+			this.props.handleCollisionWithMonster(false);
 		} else if (xDistance <= 4 && yDistance <= 4 && this.state.isColliding !== true) {
 			this.setState({isColliding: true});
+			this.props.handleCollisionWithMonster(true);
+		} else if (xDistance <= 4 && yDistance <= 4 && this.state.isColliding === true && this.props.isColliding !== true) {
+			this.props.handleCollisionWithMonster(true);
+		}
+	}
+
+	//this is here for a collision detection test
+	handleColorChange() {
+		if (this.state.isColliding && this.state.backgroundColor !== 'green') {
+			this.setState({backgroundColor: 'green'});
+		} else if (!this.state.isColliding && this.state.backgroundColor !== this.props.color) {
+			this.setState({backgroundColor: this.props.color});
 		}
 	}
 
@@ -84,7 +99,7 @@ class Monster extends Component {
 			top: `${this.state.monsterYPos}%`,
 			width: `${this.state.w}px`,
 			height: `${this.state.h}px`,
-			backgroundColor: this.props.color
+			backgroundColor: this.state.backgroundColor
 		}
 
 		return(

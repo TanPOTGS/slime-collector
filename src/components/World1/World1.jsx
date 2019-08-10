@@ -5,9 +5,12 @@ import styles from './World1.module.css';
 
 class World1 extends Component {
 
-	state ={
+	state = {
 		playerXPos: 0,
-		playerYPos: 0
+		playerYPos: 0,
+		isColliding: false,
+		backgroundColor: 'black', //this is here for a collision detection test
+		health: 100
 	}
 
 	componentDidMount() {
@@ -16,6 +19,8 @@ class World1 extends Component {
 
 	componentDidUpdate() {
 		this.handleMapBoundries();
+		console.log(this.state.isColliding);//this is here for a collision detection test
+		this.handleColorChange();//this is here for a collision detection test
   }
 
 	componentWillUnmount() {
@@ -23,7 +28,6 @@ class World1 extends Component {
 	}
 	
 	handleMapBoundries() {
-		//Handles player's map boundries on the X axis
 		if (this.state.playerXPos < 0) {
 			this.setState({
 				playerXPos: this.state.playerXPos + 1
@@ -33,7 +37,7 @@ class World1 extends Component {
 				playerXPos: this.state.playerXPos - 1
 			})
 		}
-		//Handles player's map boundries on the Y axis
+
     if (this.state.playerYPos < 0) {
       this.setState({
         playerYPos: this.state.playerYPos + 1
@@ -71,11 +75,27 @@ class World1 extends Component {
     }
 	}
 
+	handleCollisionWithMonster = (colliding) => {
+		this.setState({
+			isColliding: colliding
+		});
+	}
+
+	//this is here for a collision detection test
+	handleColorChange() {
+		if (this.state.isColliding && this.state.backgroundColor !== 'purple') {
+			this.setState({backgroundColor: 'purple'});
+		} else if (!this.state.isColliding && this.state.backgroundColor !== 'black') {
+			this.setState({backgroundColor: 'black'});
+		}
+	}
+
 	render() {
 
 		let playerCoordinates = {
 			left: `${this.state.playerXPos}%`,
 			top: `${this.state.playerYPos}%`,
+			backgroundColor: this.state.backgroundColor //this is here for a collision detection test
 		}
 
 		return (
@@ -90,10 +110,33 @@ class World1 extends Component {
 				</NavLink>
 
 				<div className={styles.World1}>
+
 					<div className={styles.PlayerBlock} style={playerCoordinates}></div>
-					<Monster playerXPos={this.state.playerXPos} playerYPos={this.state.playerYPos} color={'red'}/>
-					<Monster playerXPos={this.state.playerXPos} playerYPos={this.state.playerYPos} color={'blue'}/>
-					<Monster playerXPos={this.state.playerXPos} playerYPos={this.state.playerYPos} color={'yellow'}/>
+
+					<Monster
+					playerXPos={this.state.playerXPos}
+					playerYPos={this.state.playerYPos}
+					color={'red'}
+					handleCollisionWithMonster={this.handleCollisionWithMonster}
+					isColliding={this.state.isColliding}
+					/>
+
+					<Monster
+					playerXPos={this.state.playerXPos}
+					playerYPos={this.state.playerYPos}
+					color={'blue'}
+					handleCollisionWithMonster={this.handleCollisionWithMonster}
+					isColliding={this.state.isColliding}
+					/>
+
+					<Monster
+					playerXPos={this.state.playerXPos}
+					playerYPos={this.state.playerYPos}
+					color={'yellow'}
+					handleCollisionWithMonster={this.handleCollisionWithMonster}
+					isColliding={this.state.isColliding}
+					/>
+
 				</div>
 
 			</div>
