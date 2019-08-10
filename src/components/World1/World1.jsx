@@ -6,11 +6,12 @@ import styles from './World1.module.css';
 class World1 extends Component {
 
 	state = {
+		gameOverDisplay: 'none',
 		playerXPos: 0,
 		playerYPos: 0,
 		isColliding: false,
 		backgroundColor: 'black', //this is here for a collision detection test
-		health: 100
+		health: 10
 	}
 
 	componentDidMount() {
@@ -19,8 +20,8 @@ class World1 extends Component {
 
 	componentDidUpdate() {
 		this.handleMapBoundries();
-		console.log(this.state.isColliding);//this is here for a collision detection test
 		this.handleColorChange();//this is here for a collision detection test
+		console.log(this.state.health);
   }
 
 	componentWillUnmount() {
@@ -54,22 +55,26 @@ class World1 extends Component {
       case 37:
       this.setState({
         playerXPos: this.state.playerXPos - 2
-      });
+			});
+			this.handleTakingDamage();
       break;
       case 39:
       this.setState({
         playerXPos: this.state.playerXPos + 2
-      });
+			});
+			this.handleTakingDamage();
       break;
       case 38:
       this.setState({
         playerYPos: this.state.playerYPos - 2
-      });
+			});
+			this.handleTakingDamage();
       break;
       case 40:
       this.setState({
 				playerYPos: this.state.playerYPos + 2
 			});
+			this.handleTakingDamage();
       break;
       default:
     }
@@ -90,12 +95,31 @@ class World1 extends Component {
 		}
 	}
 
+	handleTakingDamage() {
+		if (this.state.isColliding === true) {
+			this.setState({
+				health: this.state.health - 1
+			});
+		}
+		
+		if (this.state.health <= 0) {
+			document.removeEventListener('keydown', this.handleKeyPress);
+			this.setState({
+				gameOverDisplay: 'block'
+			});
+		}
+	}
+
 	render() {
 
 		let playerCoordinates = {
 			left: `${this.state.playerXPos}%`,
 			top: `${this.state.playerYPos}%`,
 			backgroundColor: this.state.backgroundColor //this is here for a collision detection test
+		}
+
+		let gameOverDisplay = {
+			display: this.state.gameOverDisplay
 		}
 
 		return (
@@ -110,6 +134,8 @@ class World1 extends Component {
 				</NavLink>
 
 				<div className={styles.World1}>
+
+					<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
 
 					<div className={styles.PlayerBlock} style={playerCoordinates}></div>
 
