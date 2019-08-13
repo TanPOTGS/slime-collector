@@ -12,7 +12,7 @@ class App extends Component {
 	}
 
 	handleSignupOrLogin = () => {
-    this.setState({player: playerService.getPlayer()});
+		this.setState({player: playerService.getPlayer()});
   }
 
   handleLogout = () => {

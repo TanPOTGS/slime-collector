@@ -10,7 +10,7 @@ class World1 extends Component {
 		playerXPos: 0,
 		playerYPos: 0,
 		isColliding: false,
-		backgroundColor: 'black', //this is here for a collision detection test
+		backgroundColor: 'white', //this is here for a collision detection test
 		health: 10
 	}
 
@@ -21,7 +21,6 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();//this is here for a collision detection test
-		console.log(this.state.health);
   }
 
 	componentWillUnmount() {
@@ -90,8 +89,8 @@ class World1 extends Component {
 	handleColorChange() {
 		if (this.state.isColliding && this.state.backgroundColor !== 'purple') {
 			this.setState({backgroundColor: 'purple'});
-		} else if (!this.state.isColliding && this.state.backgroundColor !== 'black') {
-			this.setState({backgroundColor: 'black'});
+		} else if (!this.state.isColliding && this.state.backgroundColor !== 'white') {
+			this.setState({backgroundColor: 'white'});
 		}
 	}
 
@@ -150,7 +149,7 @@ class World1 extends Component {
 					<Monster
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
-					color={'blue'}
+					color={'red'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
 					/>
@@ -158,7 +157,7 @@ class World1 extends Component {
 					<Monster
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
-					color={'yellow'}
+					color={'red'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
 					/>

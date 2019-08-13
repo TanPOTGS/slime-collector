@@ -1,6 +1,6 @@
 .World1Container {
 	position: relative;
-	border: 10px double black;
+	border: 10px double white;
 	width: fit-content;
 }
 .BackToHarvestPage {
@@ -10,11 +10,11 @@
 	width: fit-content;
 	align-self: flex-end;
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 .World1 {
 	position: relative;
-	border: 10px double black;
+	border: 10px double white;
 	margin: 20px;
 	height: 500px;
 	width: 500px;
@@ -26,12 +26,13 @@
 }
 .GameOver {
 	position: absolute;
-	border: 10px double black;
+	border: 10px double white;
 	width: 180px;
 	height: 55px;
 	text-align: center;
 	left: 30%;
 	top: 45%;
 	z-index: 1;
-	background-color: white;
+	background-color: black;
+	color: white;
 }

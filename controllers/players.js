@@ -41,7 +41,7 @@ async function login(req, res) {
   try {
 		//Try to find a Player model in the database by its username
 		const player = await Player.findOne({username: req.body.username});
-		//If such a player doesn't exist, retyrn an error.
+		//If such a player doesn't exist, return an error.
 		//This error will be used in the login page, and displayed under
 		//the login form if the an error is return upon login.
 		if (!player) return res.status(401).json({err: 'bad credentials'});

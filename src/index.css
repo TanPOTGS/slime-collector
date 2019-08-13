@@ -7,9 +7,11 @@
 
 body {
 	margin: 0;
-	padding: 0;
-	height: 100vh;
-  font-family: 'PKMN RBYGSC', sans-serif;
+	padding: 5px;
+	height: 98vh;
+	font-family: 'PKMN RBYGSC', sans-serif;
+	background-color: black;
+	color: white;
 }
 #root {
 	height: 100%;

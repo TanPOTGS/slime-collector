@@ -1,6 +1,6 @@
 .HowtoPage {
 	position: relative;
-	border: 10px double black;
+	border: 10px double white;
 }
 .HomeNavLink {
 	position: absolute;
@@ -9,5 +9,5 @@
 	width: fit-content;
 	align-self: flex-end;
 	text-decoration: none;
-	color: black;
+	color: white;
 }

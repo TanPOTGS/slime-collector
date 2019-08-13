@@ -3,7 +3,7 @@
 	position: relative;
 	flex-direction: column;
 	width: fit-content;
-	border: 10px double black;
+	border: 10px double white;
 	padding: 3% 3% .5% 2%;
 }
 .HomeNavLink {
@@ -13,10 +13,11 @@
 	width: fit-content;
 	align-self: flex-end;
 	text-decoration: none;
-	color: black;
+	color: white;
 }
 .ErrorMsg {
 	display: inline;
 	margin: 0;
 	align-self: center;
+	padding: 5px;
 }

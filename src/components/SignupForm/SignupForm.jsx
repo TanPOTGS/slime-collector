@@ -25,6 +25,7 @@ class SignupForm extends Component {
       // Successfully signed up - show GamePage
       this.props.history.push('/');
     } catch (err) {
+			this.props.handleBorderDisplay();
       // Invalid user data (probably duplicate username)
       this.props.updateMessage(err.message);
     }
@@ -37,9 +38,11 @@ class SignupForm extends Component {
   render() {
     return (
       <div>
+				
         <form className={styles.SignupForm} onSubmit={this.handleSubmit} >
 					
 					<div className={styles.FormLable}>
+
 						<span>Username:</span>
 
 						<input
@@ -50,9 +53,11 @@ class SignupForm extends Component {
 						name="username"
 						onChange={this.handleChange}
 						/>
+
 					</div>
 
 					<div className={styles.FormLable}>
+
 						<span>Password:</span>
 
 						<input
@@ -63,9 +68,11 @@ class SignupForm extends Component {
 						name="password"
 						onChange={this.handleChange}
 						/>
+
 					</div>
 
 					<div className={styles.FormLable}>
+
 						<span>Confirm Password:</span>
 
 						<input
@@ -76,10 +83,13 @@ class SignupForm extends Component {
 						name="passwordConf"
 						onChange={this.handleChange}
 						/>
+
 					</div>
 
           <button className={styles.FormButton} disabled={this.isFormInvalid()}>Sign Up</button>
+
         </form>
+
       </div>
     );
   }

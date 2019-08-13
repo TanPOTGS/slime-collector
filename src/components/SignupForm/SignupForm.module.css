@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+	color: white;
 }
 .FormLable {
 	margin: 3% 0;
@@ -14,6 +15,8 @@
 	font-family: 'PKMN RBYGSC', sans-serif;
 	font-size: .9em;
 	outline-offset: 0;
+	background-color: black;
+	color: white;
 }
 .FormButton {
 	cursor: pointer;
@@ -23,5 +26,10 @@
 	font-family: 'PKMN RBYGSC', sans-serif;
 	outline: none;
 	border: none;
-	background-color: white;
+	background-color: black;
+	color: white;
+}
+.FormButton:disabled {
+	color: rgb(71, 70, 70);
+	cursor: default;
 }
