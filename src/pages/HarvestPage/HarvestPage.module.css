@@ -1,3 +1,72 @@
 .HarvestPage {
+	position: relative;
 	border: 10px double white;
+}
+
+.HomeNavLink {
+	position: absolute;
+	right: 3px;
+	top: 0px;
+	width: fit-content;
+	align-self: flex-end;
+	text-decoration: none;
+	color: white;
+}
+
+.HarvestNavBar {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-evenly;
+ margin: 50px 0;
+}
+
+.World1NavLink {
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+.World2NavLink {
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+.World3NavLink {
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+
+.Portrait {
+	border: 10px double white;
+	width: 250px;
+	height: 250px;
+	margin-bottom: 25px;
+}
+.InnerPortrait1 {
+	width: 100%;
+	height: 100%;
+	background-color: red;
+}
+.InnerPortrait2 {
+	width: 100%;
+	height: 100%;
+	background-color: blue;
+}
+.InnerPortrait3 {
+	width: 100%;
+	height: 100%;
+	background-color: burlywood;
+}
+
+.World1LinkSpan {
+	border: 10px double white;
+	padding: 10px;
+}
+.World2LinkSpan {
+	border: 10px double white;
+	padding: 10px;
+}
+.World3LinkSpan {
+	border: 10px double white;
+	padding: 10px;
 }

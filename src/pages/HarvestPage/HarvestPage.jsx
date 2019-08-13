@@ -4,8 +4,12 @@ import styles from './HarvestPage.module.css';
 
 const HarvestPage = () => (
 	<div className={styles.HarvestPage}>
+		
+		<NavLink exact to='/' className={styles.HomeNavLink}>
+			<span className={styles.Close}>&times;</span>
+		</NavLink>
 
-		<nav className={styles.HarvestNavbar}>
+		<nav className={styles.HarvestNavBar}>
 
 			<NavLink 
 			exact 
@@ -13,6 +17,9 @@ const HarvestPage = () => (
 			className={styles.World1NavLink} 
 			activeClassName={styles.NavLinkCurrent}
 			>
+				<div className={styles.Portrait}>
+					<div className={styles.InnerPortrait1}></div>
+				</div>
 				<span className={styles.World1LinkSpan}>World 1</span>
 			</NavLink>
 
@@ -22,6 +29,9 @@ const HarvestPage = () => (
 			className={styles.World2NavLink} 
 			activeClassName={styles.NavLinkCurrent}
 			>
+				<div className={styles.Portrait}>
+					<div className={styles.InnerPortrait2}></div>
+				</div>
 				<span className={styles.World2LinkSpan}>World 2</span>
 			</NavLink>
 
@@ -31,6 +41,9 @@ const HarvestPage = () => (
 			className={styles.World3NavLink} 
 			activeClassName={styles.NavLinkCurrent}
 			>
+				<div className={styles.Portrait}>
+					<div className={styles.InnerPortrait3}></div>
+				</div>
 				<span className={styles.World3LinkSpan}>World 3</span>
 			</NavLink>
 
