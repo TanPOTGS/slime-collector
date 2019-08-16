@@ -6,7 +6,8 @@ const SECRET = process.env.SECRET;
 module.exports = {
 	signup,
 	createJWT,
-	login
+	login,
+	updatePlayerHealth
 };
 
 async function signup(req, res) {
@@ -55,6 +56,15 @@ async function login(req, res) {
         return res.status(401).json({err: 'bad credentials'});
       }
     });
+  } catch (err) {
+    return res.status(401).json(err);
+  }
+}
+
+async function updatePlayerHealth(req, res) {
+  try {
+		await Player.updateOne({id: req.body.id}, {health: req.body.health});
+		return res.json();
   } catch (err) {
     return res.status(401).json(err);
   }

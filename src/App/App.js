@@ -13,6 +13,7 @@ class App extends Component {
 
 	handleSignupOrLogin = () => {
 		this.setState({player: playerService.getPlayer()});
+		console.log(this.state.player.health);
   }
 
   handleLogout = () => {

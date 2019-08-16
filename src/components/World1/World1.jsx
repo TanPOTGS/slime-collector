@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Monster from '../Monster/Monster';
+import playerService from '../../utilities/playerService'
 import styles from './World1.module.css';
 
 class World1 extends Component {
@@ -11,7 +12,7 @@ class World1 extends Component {
 		playerYPos: 0,
 		isColliding: false,
 		backgroundColor: 'white', //this is here for a collision detection test
-		health: 10
+		health: this.props.player.health
 	}
 
 	componentDidMount() {
@@ -21,10 +22,12 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();//this is here for a collision detection test
+		console.log(this.state.health);
   }
 
 	componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyPress);
+		document.removeEventListener('keydown', this.handleKeyPress);
+		playerService.updatePlayerHealth(this.state.health, this.props.player._id);
 	}
 	
 	handleMapBoundries() {

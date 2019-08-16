@@ -28,6 +28,15 @@ const HomePage = (props) => {
 
 		<NavLink 
 		exact 
+		to='/trader' 
+		className={styles.TraderNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.TraderLinkSpan}>Trader</span>
+		</NavLink>
+
+		<NavLink 
+		exact 
 		to='/' 
 		className={styles.LogoutNavLink} 
 		onClick={props.handleLogout}

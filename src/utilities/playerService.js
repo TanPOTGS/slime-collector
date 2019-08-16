@@ -16,15 +16,15 @@ function signup(player) {
 		tokenService.setToken(token)
 	});
 }
-
+/*****************************************************************************************/
 function getPlayer() {
   return tokenService.getPlayerFromToken();
 }
-
+/*****************************************************************************************/
 function logout() {
 	tokenService.removeToken();
 }
-
+/*****************************************************************************************/
 function login(creds) {
   return fetch(BASE_URL + 'login', {
     method: 'POST',
@@ -38,10 +38,35 @@ function login(creds) {
   })
   .then(({token}) => tokenService.setToken(token));
 }
+/*****************************************************************************************/
+function updatePlayerHealth(info, id) {
+	return fetch(BASE_URL + id, {
+		method: 'PUT',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(info)
+	})
+	.then(res => {
+    if (res.ok) return console.log('Health was updated!');
+    throw new Error(`Health was not updated. ${res.status}`);
+	})
+}
+// function updatePlayerHealth(info, id) {
+//   const options = {
+//     method: 'PUT',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       // Add this header - don't forget the space after Bearer
+//       'Authorization': 'Bearer ' + tokenService.getToken()
+//     },
+//     body: JSON.stringify(info)
+//   };
+//   return fetch(BASE_URL + id, options).then(res => console.log(res.status));
+// }
 
 export default {
 	signup,
 	getPlayer,
 	logout,
-	login
+	login,
+	updatePlayerHealth
 };
