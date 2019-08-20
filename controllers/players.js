@@ -64,6 +64,7 @@ async function login(req, res) {
 async function updatePlayerHealth(req, res) {
   try {
 		await Player.updateOne({id: req.body.id}, {health: req.body.health});
+		console.log(req.body)
 		return res.json();
   } catch (err) {
     return res.status(401).json(err);

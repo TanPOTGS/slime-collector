@@ -27,7 +27,8 @@ class World1 extends Component {
 
 	componentWillUnmount() {
 		document.removeEventListener('keydown', this.handleKeyPress);
-		playerService.updatePlayerHealth(this.state.health, this.props.player._id);
+		playerService.updatePlayerHealth(this.state, this.props.player._id);
+		this.props.updatePlayerState();
 	}
 	
 	handleMapBoundries() {

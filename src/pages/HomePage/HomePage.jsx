@@ -28,6 +28,33 @@ const HomePage = (props) => {
 
 		<NavLink 
 		exact 
+		to='/collection' 
+		className={styles.CollectionNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.CollectionLinkSpan}>Collection</span>
+		</NavLink>
+
+		<NavLink 
+		exact 
+		to='/inventory' 
+		className={styles.InventoryNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.InventoryLinkSpan}>Inventory</span>
+		</NavLink>
+
+		<NavLink 
+		exact 
+		to='/fuse' 
+		className={styles.FuseNavLink} 
+		activeClassName={styles.NavLinkCurrent}
+		>
+			<span className={styles.FuseLinkSpan}>Fuse</span>
+		</NavLink>
+
+		<NavLink 
+		exact 
 		to='/trader' 
 		className={styles.TraderNavLink} 
 		activeClassName={styles.NavLinkCurrent}

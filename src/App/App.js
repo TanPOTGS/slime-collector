@@ -13,17 +13,21 @@ class App extends Component {
 
 	handleSignupOrLogin = () => {
 		this.setState({player: playerService.getPlayer()});
-		console.log(this.state.player.health);
+		console.log(this.state.player);
   }
 
   handleLogout = () => {
     playerService.logout();
     this.setState({ player: '' });
-  }
+	}
+	
+	updatePlayerState = () => {
+
+	}
 
   async componentDidMount() {
     const player = playerService.getPlayer();
-    this.setState({player});
+		this.setState({player});
 	}
 
 	render() {
@@ -33,6 +37,7 @@ class App extends Component {
 				player={this.state.player} 
 				handleSignupOrLogin={this.handleSignupOrLogin}
 				handleLogout={this.handleLogout}
+				updatePlayerState={this.updatePlayerState}
 				/>
 			</div>
     );
