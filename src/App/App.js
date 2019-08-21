@@ -13,16 +13,12 @@ class App extends Component {
 
 	handleSignupOrLogin = () => {
 		this.setState({player: playerService.getPlayer()});
-		console.log(this.state.player);
+		//console.log(this.state.player);
   }
 
   handleLogout = () => {
     playerService.logout();
     this.setState({ player: '' });
-	}
-	
-	updatePlayerState = () => {
-
 	}
 
   async componentDidMount() {

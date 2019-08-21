@@ -22,13 +22,12 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();//this is here for a collision detection test
-		console.log(this.state.health);
+		console.log(this.state.health);//this is here to test player health
   }
 
 	componentWillUnmount() {
 		document.removeEventListener('keydown', this.handleKeyPress);
-		playerService.updatePlayerHealth(this.state, this.props.player._id);
-		this.props.updatePlayerState();
+		playerService.updatePlayerHealth(this.state, this.props.player._id);//refactor so that only what is need is being passed
 	}
 	
 	handleMapBoundries() {

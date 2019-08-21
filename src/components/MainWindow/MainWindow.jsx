@@ -5,6 +5,9 @@ import SignupPage from '../../pages/SignupPage/SignupPage';
 import HowtoPage from '../../pages/HowtoPage/HowtoPage';
 import HarvestPage from '../../pages/HarvestPage/HarvestPage'
 import TraderPage from '../../pages/TraderPage/TraderPage';
+import CollectionPage from '../../pages/CollectionPage/CollectionPage';
+import InventoryPage from '../../pages/InventoryPage/InventoryPage';
+import FusePage from '../../pages/FusePage/FusePage';
 import World1 from '../World1/World1';
 import World2 from '../World2/World2';
 import World3 from '../World3/World3';
@@ -22,6 +25,9 @@ const MainWindow = (props) => (
 			<Route exact path='/harvest/world2' render={() => (playerService.getPlayer() ? <World2 {...props}/> : <Redirect to='/login' />)} />
 			<Route exact path='/harvest/world3' render={() => (playerService.getPlayer() ? <World3 {...props}/> : <Redirect to='/login' />)} />
 			<Route exact path='/trader' render={() => (playerService.getPlayer() ? <TraderPage /> : <Redirect to='/login' />)} />
+			<Route exact path='/collection' render={() => (playerService.getPlayer() ? <CollectionPage /> : <Redirect to='/login' />)} />
+			<Route exact path='/inventory' render={() => (playerService.getPlayer() ? <InventoryPage /> : <Redirect to='/login' />)} />
+			<Route exact path='/fuse' render={() => (playerService.getPlayer() ? <FusePage /> : <Redirect to='/login' />)} />
     </Switch>
   </div>
 )

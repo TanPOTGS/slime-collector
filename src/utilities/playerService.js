@@ -43,6 +43,7 @@ function login(creds) {
   .then(({token}) => tokenService.setToken(token));
 }
 /*****************************************************************************************/
+//look into refactoring this function
 function updatePlayerHealth(info, id) {
 	return fetch(BASE_URL + id, {
 		method: 'PUT',
