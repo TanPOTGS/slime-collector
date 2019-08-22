@@ -8,7 +8,7 @@ router.post('/login', playersCtrl.login);
 
 /*---------- Protected Routes ----------*/
 router.use(require('../../config/auth'));
-router.put('/:id', playersCtrl.updatePlayerHealth);
+router.put('/:id', playersCtrl.updatePlayerData);
 
 /*---------- Helper Functions ----------*/
 // function checkAuth(req, res, next) {

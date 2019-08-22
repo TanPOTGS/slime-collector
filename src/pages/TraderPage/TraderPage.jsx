@@ -5,12 +5,11 @@ import styles from './TraderPage.module.css';
 const TraderPage = () => {
 	const id = '5d5208d317f38e0a341bb51f';
 	const info = {
-		health: 10,
-		_id: '5d5208d317f38e0a341bb51f'
+		health: 10
 	}
 
 	function handleOnClick() {
-		playerService.updatePlayerHealth(info, id);
+		playerService.updatePlayerData(info, id);
 	}
 
 	return(

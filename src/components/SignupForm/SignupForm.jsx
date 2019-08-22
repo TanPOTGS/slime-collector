@@ -22,11 +22,10 @@ class SignupForm extends Component {
     try {
 			await playerService.signup(this.state);
 			this.props.handleSignupOrLogin();
-      // Successfully signed up - show GamePage
+			this.props.setHomePageState();
       this.props.history.push('/');
     } catch (err) {
 			this.props.handleBorderDisplay();
-      // Invalid user data (probably duplicate username)
       this.props.updateMessage(err.message);
     }
   }

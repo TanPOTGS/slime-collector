@@ -7,7 +7,7 @@ module.exports = {
 	signup,
 	createJWT,
 	login,
-	updatePlayerHealth
+	updatePlayerData
 };
 
 async function signup(req, res) {
@@ -61,9 +61,9 @@ async function login(req, res) {
   }
 }
 
-async function updatePlayerHealth(req, res) {
+async function updatePlayerData(req, res) {
   try {
-		await Player.updateOne({id: req.body.id}, {health: req.body.health});
+		await Player.updateOne({id: req.body.id}, {$set: req.body});
 		console.log(req.body)
 		return res.json();
   } catch (err) {

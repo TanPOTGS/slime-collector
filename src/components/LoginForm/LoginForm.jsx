@@ -19,7 +19,8 @@ class LoginForm extends Component {
     e.preventDefault();
     try {
       await playerService.login(this.state);
-      this.props.handleSignupOrLogin();
+			this.props.handleSignupOrLogin();
+			this.props.setHomePageState();
       this.props.history.push('/');
     } catch (err) {
       this.props.updateMessage(err.message);

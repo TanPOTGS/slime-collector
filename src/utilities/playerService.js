@@ -44,7 +44,7 @@ function login(creds) {
 }
 /*****************************************************************************************/
 //look into refactoring this function
-function updatePlayerHealth(info, id) {
+function updatePlayerData(info, id) {
 	return fetch(BASE_URL + id, {
 		method: 'PUT',
     headers: {
@@ -54,8 +54,8 @@ function updatePlayerHealth(info, id) {
     body: JSON.stringify(info)
 	})
 	.then(res => {
-    if (res.ok) return console.log('Health was updated!');
-    throw new Error('Health was not updated.');
+    if (res.ok) return console.log('Player data was updated!');
+    throw new Error('Player data was not updated.');
 	})
 }
 
@@ -64,5 +64,5 @@ export default {
 	getPlayer,
 	logout,
 	login,
-	updatePlayerHealth
+	updatePlayerData
 };

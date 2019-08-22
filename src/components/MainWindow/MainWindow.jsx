@@ -20,7 +20,7 @@ const MainWindow = (props) => (
       <Route exact path='/login' render={({ history }) => <LoginPage history={history} {...props}/>} />
       <Route exact path='/signup' render={({ history }) => <SignupPage history={history} {...props}/>} />
 			<Route exact path='/howto' render={() => <HowtoPage />} />
-			<Route exact path='/harvest' render={() => (playerService.getPlayer() ? <HarvestPage {...props}/> : <Redirect to='/login' />)} />
+			<Route exact path='/harvest' render={() => (playerService.getPlayer() ? <HarvestPage /> : <Redirect to='/login' />)} />
 			<Route exact path='/harvest/world1' render={() => (playerService.getPlayer() ? <World1 {...props}/> : <Redirect to='/login' />)} />
 			<Route exact path='/harvest/world2' render={() => (playerService.getPlayer() ? <World2 {...props}/> : <Redirect to='/login' />)} />
 			<Route exact path='/harvest/world3' render={() => (playerService.getPlayer() ? <World3 {...props}/> : <Redirect to='/login' />)} />

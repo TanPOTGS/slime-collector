@@ -12,7 +12,7 @@ class World1 extends Component {
 		playerYPos: 0,
 		isColliding: false,
 		backgroundColor: 'white', //this is here for a collision detection test
-		health: this.props.player.health
+		health: this.props.health
 	}
 
 	componentDidMount() {
@@ -27,7 +27,8 @@ class World1 extends Component {
 
 	componentWillUnmount() {
 		document.removeEventListener('keydown', this.handleKeyPress);
-		playerService.updatePlayerHealth(this.state, this.props.player._id);//refactor so that only what is need is being passed
+		playerService.updatePlayerData(this.state, this.props.id);//refactor so that only what is need is being passed
+		//this.props.updateHomePageState();
 	}
 	
 	handleMapBoundries() {

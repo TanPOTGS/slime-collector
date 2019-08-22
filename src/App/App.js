@@ -13,7 +13,6 @@ class App extends Component {
 
 	handleSignupOrLogin = () => {
 		this.setState({player: playerService.getPlayer()});
-		//console.log(this.state.player);
   }
 
   handleLogout = () => {
@@ -30,10 +29,9 @@ class App extends Component {
     return (
 			<div className={styles.App}>
 				<HomePage 
-				player={this.state.player} 
+				player={this.state.player}
 				handleSignupOrLogin={this.handleSignupOrLogin}
 				handleLogout={this.handleLogout}
-				updatePlayerState={this.updatePlayerState}
 				/>
 			</div>
     );

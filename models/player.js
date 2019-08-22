@@ -7,7 +7,10 @@ const playerSchema = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
 	password: {type: String, required: true},
 	health: {type: Number, default: 10},
-	canFight: {type: Boolean, default: true}
+	canFight: {type: Boolean, default: true},
+	bagIsFull: {type: Boolean, default: false},
+	slimeCollection: [],
+	slimeInventory: []
 }, {
   timestamps: true
 });
