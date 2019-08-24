@@ -10,25 +10,34 @@ class World1 extends Component {
 		gameOverDisplay: 'none',
 		playerXPos: 0,
 		playerYPos: 0,
+		playerDirection: 'right',
+		swordIsHidden: true,
 		isColliding: false,
 		backgroundColor: 'white', //this is here for a collision detection test
-		health: this.props.health
+		dataForUpdate: {
+			health: this.props.player.health
+		},
+		swordDisplay: {
+			display: 'none'
+		}
 	}
 
 	componentDidMount() {
 		document.addEventListener('keydown', this.handleKeyPress);
+		document.addEventListener('keyup', this.handleKeyUp);
 	}
 
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();//this is here for a collision detection test
-		console.log(this.state.health);//this is here to test player health
+		console.log(this.state.dataForUpdate.health);//this is here to test player health
   }
 
-	componentWillUnmount() {
+	async componentWillUnmount() {
 		document.removeEventListener('keydown', this.handleKeyPress);
-		playerService.updatePlayerData(this.state, this.props.id);//refactor so that only what is need is being passed
-		//this.props.updateHomePageState();
+		document.removeEventListener('keyup', this.handleKeyUp);
+		let newData = await playerService.updatePlayerData(this.state.dataForUpdate, this.props.player.id);
+		this.props.updateHomePageState(newData);
 	}
 	
 	handleMapBoundries() {
@@ -55,32 +64,54 @@ class World1 extends Component {
 
 	handleKeyPress = (e) => {
     switch(e.keyCode) {
-      case 37:
-      this.setState({
-        playerXPos: this.state.playerXPos - 2
-			});
-			this.handleTakingDamage();
+      case 37://Left
+				this.setState({
+					playerXPos: this.state.playerXPos - 2,
+					playerDirection: 'left'
+				});
+				this.handleTakingDamage();
       break;
-      case 39:
-      this.setState({
-        playerXPos: this.state.playerXPos + 2
-			});
-			this.handleTakingDamage();
+      case 39://Right
+				this.setState({
+					playerXPos: this.state.playerXPos + 2,
+					playerDirection: 'right'
+				});
+				this.handleTakingDamage();
       break;
-      case 38:
-      this.setState({
-        playerYPos: this.state.playerYPos - 2
-			});
-			this.handleTakingDamage();
+      case 38://Up
+				this.setState({
+					playerYPos: this.state.playerYPos - 2,
+					playerDirection: 'up'
+				});
+				this.handleTakingDamage();
       break;
-      case 40:
-      this.setState({
-				playerYPos: this.state.playerYPos + 2
-			});
-			this.handleTakingDamage();
-      break;
+      case 40://Down
+				this.setState({
+					playerYPos: this.state.playerYPos + 2,
+					playerDirection: 'down'
+				});
+				this.handleTakingDamage();
+			break;
+			case 70://Sword attack
+				this.setState({
+					swordIsHidden: false
+				});
+				this.handleSwordDisplay();
+			break;
       default:
     }
+	}
+
+	handleKeyUp = (e) => {
+		switch(e.keyCode) {
+			case 70://Sword attack
+				this.setState({
+					swordIsHidden: true
+				});
+				this.handleSwordDisplay();
+			break;
+			default:
+		}
 	}
 
 	handleCollisionWithMonster = (colliding) => {
@@ -101,11 +132,11 @@ class World1 extends Component {
 	handleTakingDamage() {
 		if (this.state.isColliding === true) {
 			this.setState({
-				health: this.state.health - 1
+				dataForUpdate: {health: this.state.dataForUpdate.health - 1}
 			});
 		}
 		
-		if (this.state.health <= 0) {
+		if (this.state.dataForUpdate.health <= 0) {
 			document.removeEventListener('keydown', this.handleKeyPress);
 			this.setState({
 				gameOverDisplay: 'block'
@@ -113,9 +144,21 @@ class World1 extends Component {
 		}
 	}
 
+	handleSwordDisplay() {
+		if (this.state.swordIsHidden) {
+			this.setState({
+				swordDisplay: {display: 'none'}
+			});
+		} else {
+			this.setState({
+				swordDisplay: {display: 'block'}
+			});
+		}
+	}
+
 	render() {
 
-		let playerCoordinates = {
+		let playerCoordinatesAndDamageColor = {
 			left: `${this.state.playerXPos}%`,
 			top: `${this.state.playerYPos}%`,
 			backgroundColor: this.state.backgroundColor //this is here for a collision detection test
@@ -140,12 +183,15 @@ class World1 extends Component {
 
 					<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
 
-					<div className={styles.PlayerBlock} style={playerCoordinates}></div>
+					<div className={styles.PlayerBlock} style={playerCoordinatesAndDamageColor}>
+						<div className={styles.PlayerSword} style={this.state.swordDisplay}></div>
+					</div>
 
 					<Monster
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
-					color={'red'}
+					color={'rgb(136, 0, 21)'}
+					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
 					/>
@@ -153,7 +199,8 @@ class World1 extends Component {
 					<Monster
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
-					color={'red'}
+					color={'rgb(136, 0, 21)'}
+					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
 					/>
@@ -161,7 +208,8 @@ class World1 extends Component {
 					<Monster
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
-					color={'red'}
+					color={'rgb(136, 0, 21)'}
+					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
 					/>

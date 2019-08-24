@@ -24,6 +24,13 @@
 	width: 20px;
 	height: 20px;
 }
+.PlayerSword {
+	position: absolute;
+	background-color: dimgray;
+	height: 5px;
+	width: 30px;
+	z-index: -1;
+}
 .GameOver {
 	position: absolute;
 	border: 10px double white;

@@ -6,10 +6,11 @@ class Monster extends Component {
 	state = {
 		monsterXPos: '',
 		monsterYPos: '',
-		w: 20,
-		h: 20,
+		w: 16,
+		h: 16,
 		isColliding: false,
-		backgroundColor: this.props.color //this is here for a collision detection test
+		backgroundColor: this.props.color, //this is here for a collision detection test
+		borderColor: this.props.borderColor
 	}
 
 	componentDidMount() {
@@ -99,7 +100,8 @@ class Monster extends Component {
 			top: `${this.state.monsterYPos}%`,
 			width: `${this.state.w}px`,
 			height: `${this.state.h}px`,
-			backgroundColor: this.state.backgroundColor
+			backgroundColor: this.state.backgroundColor,
+			borderColor: this.state.borderColor
 		}
 
 		return(

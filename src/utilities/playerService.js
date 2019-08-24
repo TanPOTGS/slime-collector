@@ -37,13 +37,12 @@ function login(creds) {
   })
   .then(res => {
     //Valid login if we have a status of 2xx (res.ok)
-    if (res.ok) return res.json();
+		if (res.ok) return res.json();
     throw new Error('Bad Credentials!');
   })
   .then(({token}) => tokenService.setToken(token));
 }
 /*****************************************************************************************/
-//look into refactoring this function
 function updatePlayerData(info, id) {
 	return fetch(BASE_URL + id, {
 		method: 'PUT',
@@ -54,10 +53,32 @@ function updatePlayerData(info, id) {
     body: JSON.stringify(info)
 	})
 	.then(res => {
-    if (res.ok) return console.log('Player data was updated!');
+    if (res.ok) {
+			console.log('Player data was updated!');
+			return res.json();
+		}
     throw new Error('Player data was not updated.');
 	})
 }
+
+// function updatePlayerData(info, id) {
+// 	const options = {
+// 		method: 'PUT',
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 			'Authorization': 'Bearer ' + tokenService.getToken()
+// 		},
+// 		body: JSON.stringify(info)
+// 	};
+// 	return fetch(BASE_URL + id, options).then(res => {
+// 		if (res.ok) {
+// 			console.log('Player data was updated!');
+// 			return res.json();
+// 		}
+//     throw new Error('Player data was not updated.');
+// 	})
+// 	.then(data => data);
+// }
 
 export default {
 	signup,

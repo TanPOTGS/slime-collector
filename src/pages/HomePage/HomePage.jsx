@@ -17,7 +17,6 @@ class HomePage extends Component {
 
 	setHomePageState = () => {
 		let player = playerService.getPlayer();
-
 		this.setState({
 			id: player._id,
 			health: player.health,
@@ -26,12 +25,14 @@ class HomePage extends Component {
 			slimeCollection: player.slimeCollection,
 			slimeInventory: player.slimeInventory
 		});
-		console.log(this.state);
+
+		console.log(`This is HomePage state when first set by logging in: ${this.state.health}`);
 	}
 
-	// updateHomePageState = () => {
-		
-	// }
+	updateHomePageState = (newData) => {
+		this.setState(newData);
+		console.log(`This is HomePage state AFTER the updated data is sent back to HomePage: ${this.state.health}`);
+	}
 
 	render() {
 		let nav = this.props.player ?
@@ -136,7 +137,11 @@ class HomePage extends Component {
 		return (
 			<div className={styles.HomePage}>
 				{nav}
-				<MainWindow {...this.props} setHomePageState={this.setHomePageState} health={this.state.health} updateHomePageState={this.updateHomePageState}/>
+				<MainWindow
+				{...this.props}
+				setHomePageState={this.setHomePageState}
+				updateHomePageState={this.updateHomePageState}
+				player={this.state}/>
 			</div>
 		);
 	}

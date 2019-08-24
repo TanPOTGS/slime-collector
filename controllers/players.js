@@ -50,7 +50,7 @@ async function login(req, res) {
 		//the instance of the model that called it.
     player.comparePassword(req.body.password, (err, isMatch) => {
       if (isMatch) {
-        const token = createJWT(player);
+				const token = createJWT(player);
         res.json({token});
       } else {
         return res.status(401).json({err: 'bad credentials'});
@@ -65,7 +65,7 @@ async function updatePlayerData(req, res) {
   try {
 		await Player.updateOne({id: req.body.id}, {$set: req.body});
 		console.log(req.body)
-		return res.json();
+		return res.json(req.body);
   } catch (err) {
     return res.status(401).json(err);
   }
