@@ -14,11 +14,10 @@ class World1 extends Component {
 		swordIsHidden: true,
 		isColliding: false,
 		backgroundColor: 'white', //this is here for a collision detection test
+		swordDisplay: 'none',
+		swordDirection: 'rotate(0deg)',
 		dataForUpdate: {
 			health: this.props.player.health
-		},
-		swordDisplay: {
-			display: 'none'
 		}
 	}
 
@@ -147,12 +146,36 @@ class World1 extends Component {
 	handleSwordDisplay() {
 		if (this.state.swordIsHidden) {
 			this.setState({
-				swordDisplay: {display: 'none'}
+				swordDisplay: 'none'
 			});
 		} else {
 			this.setState({
-				swordDisplay: {display: 'block'}
+				swordDisplay: 'block'
 			});
+		}
+
+		switch(this.state.playerDirection) {
+      case 'right':
+				this.setState({
+					swordDirection: 'rotate(0deg)'
+				});
+      break;
+      case 'down':
+				this.setState({
+					swordDirection: 'rotate(90deg)'
+				});
+      break;
+      case 'left':
+				this.setState({
+					swordDirection: 'rotate(180deg)'
+				});
+      break;
+      case 'up':
+				this.setState({
+					swordDirection: 'rotate(270deg)'
+				});
+			break;
+      default:
 		}
 	}
 
@@ -162,6 +185,11 @@ class World1 extends Component {
 			left: `${this.state.playerXPos}%`,
 			top: `${this.state.playerYPos}%`,
 			backgroundColor: this.state.backgroundColor //this is here for a collision detection test
+		}
+
+		let sword = {
+			display: this.state.swordDisplay,
+			transform: this.state.swordDirection
 		}
 
 		let gameOverDisplay = {
@@ -184,7 +212,7 @@ class World1 extends Component {
 					<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
 
 					<div className={styles.PlayerBlock} style={playerCoordinatesAndDamageColor}>
-						<div className={styles.PlayerSword} style={this.state.swordDisplay}></div>
+						<div className={styles.PlayerSword} style={sword}></div>
 					</div>
 
 					<Monster
