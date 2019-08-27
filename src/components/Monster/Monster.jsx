@@ -23,6 +23,7 @@ class Monster extends Component {
 		this.handleColorChange(); //this is here for a collision detection test
 	}
 
+	//refactor the two functions below into one
 	getInitialPos() {
 		this.setState({
 			monsterXPos: this.getRandomEvenNumber(),
