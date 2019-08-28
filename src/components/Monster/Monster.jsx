@@ -21,6 +21,13 @@ class Monster extends Component {
 		this.handleMapBoundries();
 		this.handleCollisionWithPlayer();
 		this.handleColorChange(); //this is here for a collision detection test
+		this.testFunction();
+	}
+
+	testFunction() {
+		if (this.props.tipOfSwordX !== null && this.props.tipOfSwordY !== null) {
+			console.log(`X: ${this.props.tipOfSwordX} || Y: ${this.props.tipOfSwordY}`);
+		}
 	}
 
 	//refactor the two functions below into one

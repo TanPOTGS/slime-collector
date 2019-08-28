@@ -7,17 +7,17 @@ import styles from './World1.module.css';
 class World1 extends Component {
 
 	state = {
-		gameOverDisplay: 'none',
 		playerXPos: 0,
 		playerYPos: 0,
 		playerDirection: 'right',
-		swordIsHidden: true,
 		isColliding: false,
 		backgroundColor: 'white', //this is here for a collision detection test
-		playerSword: {
-			display: 'none',
-			transform: 'rotate(0deg)'
-		},
+		swordIsHidden: true,
+		swordDisplay: 'none',
+		swordDirection: 'rotate(0deg)',
+		tipOfSwordX: null,
+		tipOfSwordY: null,
+		gameOverDisplay: 'none',
 		dataForUpdate: {
 			health: this.props.player.health
 		}
@@ -37,7 +37,9 @@ class World1 extends Component {
 	async componentWillUnmount() {
 		document.removeEventListener('keydown', this.handleKeyPress);
 		document.removeEventListener('keyup', this.handleKeyUp);
+
 		let newData = await playerService.updatePlayerData(this.state.dataForUpdate, this.props.player.id);
+
 		this.props.updateHomePageState(newData);
 	}
 	
@@ -98,7 +100,7 @@ class World1 extends Component {
 					swordIsHidden: false
 				});
 				this.handleSwordDisplay();
-				this.attackMonster();
+				this.handleSwordAttack();
 			break;
       default:
     }
@@ -108,7 +110,9 @@ class World1 extends Component {
 		switch(e.keyCode) {
 			case 70://Sword attack
 				this.setState({
-					swordIsHidden: true
+					swordIsHidden: true,
+					tipOfSwordX: null,
+					tipOfSwordY: null
 				});
 				this.handleSwordDisplay();
 			break;
@@ -149,42 +153,42 @@ class World1 extends Component {
 	handleSwordDisplay() {
 		if (this.state.swordIsHidden) {
 			this.setState({
-				playerSword: {display: 'none', transform: this.state.playerSword.transform}
+				swordDisplay: 'none'
 			});
 		} else {
 			this.setState({
-				playerSword: {display: 'block', transform: this.state.playerSword.transform}
+				swordDisplay: 'block'
 			});
 		}
 
 		switch(this.state.playerDirection) {
       case 'right':
 				this.setState({
-					playerSword: {display: this.state.playerSword.display, transform: 'rotate(0deg)'}
+					swordDirection: 'rotate(0deg)'
 				});
       break;
       case 'down':
 				this.setState({
-					playerSword: {display: this.state.playerSword.display, transform: 'rotate(90deg)'}
+					swordDirection: 'rotate(90deg)'
 				});
       break;
       case 'left':
 				this.setState({
-					playerSword: {display: this.state.playerSword.display, transform: 'rotate(180deg)'}
+					swordDirection: 'rotate(180deg)'
 				});
       break;
       case 'up':
 				this.setState({
-					playerSword: {display: this.state.playerSword.display, transform: 'rotate(270deg)'}
+					swordDirection: 'rotate(270deg)'
 				});
 			break;
       default:
 		}
 	}
 
-	attackMonster() {
-		let tipOfSwordX;
-		let tipOfSwordY;
+	handleSwordAttack() {
+		let tipOfSwordX = null;
+		let tipOfSwordY = null;
 		let playerCenX = this.state.playerXPos + 1;
 		let playerCenY = this.state.playerYPos + 1;
 
@@ -192,22 +196,26 @@ class World1 extends Component {
       case 'right':
 				tipOfSwordX = playerCenX + 24;
 				tipOfSwordY = playerCenY;
-				console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
+				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY});
+				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
       break;
       case 'down':
 				tipOfSwordX = playerCenX;
 				tipOfSwordY = playerCenY + 24;
-				console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
+				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
+				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
       break;
       case 'left':
 				tipOfSwordX = playerCenX - 24;
 				tipOfSwordY = playerCenY;
-				console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
+				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
+				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
       break;
       case 'up':
 				tipOfSwordX = playerCenX;
 				tipOfSwordY = playerCenY - 24;
-				console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
+				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
+				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
 			break;
       default:
 		}		
@@ -219,6 +227,11 @@ class World1 extends Component {
 			left: `${this.state.playerXPos}%`,
 			top: `${this.state.playerYPos}%`,
 			backgroundColor: this.state.backgroundColor //this is here for a collision detection test
+		}
+
+		let swordConfig = {
+			display: this.state.swordDisplay,
+			transform: this.state.swordDirection
 		}
 
 		let gameOverDisplay = {
@@ -241,7 +254,7 @@ class World1 extends Component {
 					<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
 
 					<div className={styles.PlayerBlock} style={playerCoordinatesAndDamageColor}>
-						<div className={styles.PlayerSword} style={this.state.playerSword}></div>
+						<div className={styles.PlayerSword} style={swordConfig}></div>
 					</div>
 
 					<Monster
@@ -251,6 +264,8 @@ class World1 extends Component {
 					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
+					tipOfSwordX={this.state.tipOfSwordX}
+					tipOfSwordY={this.state.tipOfSwordY}
 					/>
 
 					<Monster
@@ -260,6 +275,8 @@ class World1 extends Component {
 					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
+					tipOfSwordX={this.state.tipOfSwordX}
+					tipOfSwordY={this.state.tipOfSwordY}
 					/>
 
 					<Monster
@@ -269,6 +286,8 @@ class World1 extends Component {
 					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
+					tipOfSwordX={this.state.tipOfSwordX}
+					tipOfSwordY={this.state.tipOfSwordY}
 					/>
 
 				</div>
