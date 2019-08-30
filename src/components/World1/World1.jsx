@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Monster from '../Monster/Monster';
-import playerService from '../../utilities/playerService'
+import playerService from '../../utilities/playerService';
+import ComponentMapper from '../../utilities/ComponentMapper';
 import styles from './World1.module.css';
+
+let monstersArray = [
+	{id: 0},
+	{id: 1},
+	{id: 2},
+	{id: 3}
+];
 
 class World1 extends Component {
 
@@ -197,25 +205,21 @@ class World1 extends Component {
 				tipOfSwordX = playerCenX + 24;
 				tipOfSwordY = playerCenY;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY});
-				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
       break;
       case 'down':
 				tipOfSwordX = playerCenX;
 				tipOfSwordY = playerCenY + 24;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
-				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
       break;
       case 'left':
 				tipOfSwordX = playerCenX - 24;
 				tipOfSwordY = playerCenY;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
-				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
       break;
       case 'up':
 				tipOfSwordX = playerCenX;
 				tipOfSwordY = playerCenY - 24;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
-				// console.log(`edgeX : ${tipOfSwordX} || edgeY: ${tipOfSwordY}`);
 			break;
       default:
 		}		
@@ -257,7 +261,9 @@ class World1 extends Component {
 						<div className={styles.PlayerSword} style={swordConfig}></div>
 					</div>
 
-					<Monster
+					<ComponentMapper 
+					array={monstersArray} 
+					component={Monster}
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
 					color={'rgb(136, 0, 21)'}
@@ -267,29 +273,6 @@ class World1 extends Component {
 					tipOfSwordX={this.state.tipOfSwordX}
 					tipOfSwordY={this.state.tipOfSwordY}
 					/>
-
-					<Monster
-					playerXPos={this.state.playerXPos}
-					playerYPos={this.state.playerYPos}
-					color={'rgb(136, 0, 21)'}
-					borderColor={'rgb(247, 82, 49)'}
-					handleCollisionWithMonster={this.handleCollisionWithMonster}
-					isColliding={this.state.isColliding}
-					tipOfSwordX={this.state.tipOfSwordX}
-					tipOfSwordY={this.state.tipOfSwordY}
-					/>
-
-					<Monster
-					playerXPos={this.state.playerXPos}
-					playerYPos={this.state.playerYPos}
-					color={'rgb(136, 0, 21)'}
-					borderColor={'rgb(247, 82, 49)'}
-					handleCollisionWithMonster={this.handleCollisionWithMonster}
-					isColliding={this.state.isColliding}
-					tipOfSwordX={this.state.tipOfSwordX}
-					tipOfSwordY={this.state.tipOfSwordY}
-					/>
-
 				</div>
 
 			</div>
