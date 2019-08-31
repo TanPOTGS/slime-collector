@@ -6,10 +6,7 @@ import ComponentMapper from '../../utilities/ComponentMapper';
 import styles from './World1.module.css';
 
 let monstersArray = [
-	{id: 0},
-	{id: 1},
-	{id: 2},
-	{id: 3}
+	{id: 0, name: 'Monster 1'}
 ];
 
 class World1 extends Component {
@@ -39,7 +36,7 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();//this is here for a collision detection test
-		console.log(this.state.dataForUpdate.health);//this is here to test player health
+		//console.log(this.state.dataForUpdate.health);//this is here to test player health
   }
 
 	async componentWillUnmount() {
@@ -202,23 +199,23 @@ class World1 extends Component {
 
 		switch(this.state.playerDirection) {
       case 'right':
-				tipOfSwordX = playerCenX + 24;
+				tipOfSwordX = playerCenX + 5;
 				tipOfSwordY = playerCenY;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY});
       break;
       case 'down':
 				tipOfSwordX = playerCenX;
-				tipOfSwordY = playerCenY + 24;
+				tipOfSwordY = playerCenY + 5;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
       break;
       case 'left':
-				tipOfSwordX = playerCenX - 24;
+				tipOfSwordX = playerCenX - 5;
 				tipOfSwordY = playerCenY;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
       break;
       case 'up':
 				tipOfSwordX = playerCenX;
-				tipOfSwordY = playerCenY - 24;
+				tipOfSwordY = playerCenY - 5;
 				this.setState({tipOfSwordX: tipOfSwordX, tipOfSwordY: tipOfSwordY})
 			break;
       default:
@@ -272,6 +269,7 @@ class World1 extends Component {
 					isColliding={this.state.isColliding}
 					tipOfSwordX={this.state.tipOfSwordX}
 					tipOfSwordY={this.state.tipOfSwordY}
+					swordIsHidden={this.state.swordIsHidden}
 					/>
 				</div>
 

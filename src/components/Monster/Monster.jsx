@@ -6,11 +6,12 @@ class Monster extends Component {
 	state = {
 		monsterXPos: '',
 		monsterYPos: '',
-		w: 16,
-		h: 16,
+		w: 16, //this is in state in case I want to control the size of the monsters
+		h: 16, //this is in state in case I want to control the size of the monsters
 		isColliding: false,
-		backgroundColor: this.props.color, //this is here for a collision detection test
-		borderColor: this.props.borderColor
+		isBeingAttacked: false,
+		backgroundColor: this.props.color, //this is in state so I can control the monster's color if it is hit
+		borderColor: this.props.borderColor //this is in state so I can control the monster's color if it is hit
 	}
 
 	componentDidMount() {
@@ -20,14 +21,8 @@ class Monster extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleCollisionWithPlayer();
-		this.handleColorChange(); //this is here for a collision detection test
 		this.handleBeingAttacked();
-	}
-
-	handleBeingAttacked() {
-		if (this.props.tipOfSwordX !== null && this.props.tipOfSwordY !== null) {
-			console.log(`X: ${this.props.tipOfSwordX} || Y: ${this.props.tipOfSwordY}`);
-		}
+		this.handleColorChange();
 	}
 
 	//refactor the two functions below into one
@@ -92,12 +87,27 @@ class Monster extends Component {
 		}
 	}
 
-	//this is here for a collision detection test
+	//refactor or remove, color will only change if the monster is hit by the player's sword
 	handleColorChange() {
-		if (this.state.isColliding && this.state.backgroundColor !== 'green') {
+		if (this.state.isBeingAttacked && this.state.backgroundColor !== 'green') {
 			this.setState({backgroundColor: 'green'});
-		} else if (!this.state.isColliding && this.state.backgroundColor !== this.props.color) {
+		} else if (!this.state.isBeingAttacked && this.state.backgroundColor !== this.props.color) {
 			this.setState({backgroundColor: this.props.color});
+		}
+	}
+
+	handleBeingAttacked() {
+		if (this.props.tipOfSwordX !== null && this.props.tipOfSwordY !== null) {
+			let monsterCenX = this.state.monsterXPos + 1;
+			let monsterCenY = this.state.monsterYPos + 1;
+			let xDistance = Math.abs(monsterCenX - this.props.tipOfSwordX);
+			let yDistance = Math.abs(monsterCenY - this.props.tipOfSwordY);
+
+			if (xDistance <= 1 && yDistance <= 1 && this.state.isBeingAttacked !== true) {
+				this.setState({isBeingAttacked: true});
+			}
+		} else if (this.props.tipOfSwordX === null && this.props.tipOfSwordY === null && this.state.isBeingAttacked !== false) {
+			this.setState({isBeingAttacked: false});
 		}
 	}
 
