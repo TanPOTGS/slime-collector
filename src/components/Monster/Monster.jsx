@@ -10,8 +10,8 @@ class Monster extends Component {
 		h: 16, //this is in state in case I want to control the size of the monsters
 		isColliding: false,
 		isBeingAttacked: false,
-		backgroundColor: this.props.color, //this is in state so I can control the monster's color if it is hit
-		borderColor: this.props.borderColor //this is in state so I can control the monster's color if it is hit
+		backgroundColor: this.props.backgroundColor,
+		borderColor: this.props.borderColor
 	}
 
 	componentDidMount() {
@@ -21,7 +21,7 @@ class Monster extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleCollisionWithPlayer();
-		this.handleBeingAttacked();
+		this.handlePlayerAttacking();
 		this.handleColorChange();
 	}
 
@@ -87,27 +87,46 @@ class Monster extends Component {
 		}
 	}
 
-	//refactor or remove, color will only change if the monster is hit by the player's sword
 	handleColorChange() {
-		if (this.state.isBeingAttacked && this.state.backgroundColor !== 'green') {
-			this.setState({backgroundColor: 'green'});
-		} else if (!this.state.isBeingAttacked && this.state.backgroundColor !== this.props.color) {
-			this.setState({backgroundColor: this.props.color});
+		if (this.state.isBeingAttacked && this.state.borderColor !== 'white') {
+			this.setState({borderColor: 'white'});
+		} else if (!this.state.isBeingAttacked && this.state.borderColor !== this.props.borderColor) {
+			this.setState({borderColor: this.props.borderColor});
 		}
 	}
 
-	handleBeingAttacked() {
+	handlePlayerAttacking() {
 		if (this.props.tipOfSwordX !== null && this.props.tipOfSwordY !== null) {
 			let monsterCenX = this.state.monsterXPos + 1;
 			let monsterCenY = this.state.monsterYPos + 1;
 			let xDistance = Math.abs(monsterCenX - this.props.tipOfSwordX);
 			let yDistance = Math.abs(monsterCenY - this.props.tipOfSwordY);
 
-			if (xDistance <= 1 && yDistance <= 1 && this.state.isBeingAttacked !== true) {
+			if (xDistance <= 2 && yDistance <= 2 && this.state.isBeingAttacked !== true) {
 				this.setState({isBeingAttacked: true});
+				this.moveMonster();
 			}
 		} else if (this.props.tipOfSwordX === null && this.props.tipOfSwordY === null && this.state.isBeingAttacked !== false) {
 			this.setState({isBeingAttacked: false});
+		}
+	}
+
+	moveMonster() {
+		let num1 = Math.round(Math.random());
+		let num2 = Math.round(Math.random());
+
+		if (num1 === 0 && num2 === 0) {
+			this.setState({monsterYPos: this.state.monsterYPos - 2});
+			console.log('Moving Up');
+		} else if (num1 === 0 && num2 === 1) {
+			this.setState({monsterXPos: this.state.monsterXPos + 2});
+			console.log('Moving Right');
+		} else if (num1 === 1 && num2 === 1) {
+			this.setState({monsterYPos: this.state.monsterYPos + 2});
+			console.log('Moving Down');
+		} else if (num1 === 1 && num2 === 0) {
+			this.setState({monsterXPos: this.state.monsterXPos - 2});
+			console.log('Moving Left');
 		}
 	}
 

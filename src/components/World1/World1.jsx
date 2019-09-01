@@ -6,7 +6,9 @@ import ComponentMapper from '../../utilities/ComponentMapper';
 import styles from './World1.module.css';
 
 let monstersArray = [
-	{id: 0, name: 'Monster 1'}
+	{id: 0, name: 'Monster 1'},
+	{id: 1, name: 'Monster 2'},
+	{id: 2, name: 'Monster 3'}
 ];
 
 class World1 extends Component {
@@ -16,7 +18,8 @@ class World1 extends Component {
 		playerYPos: 0,
 		playerDirection: 'right',
 		isColliding: false,
-		backgroundColor: 'white', //this is here for a collision detection test
+		hasTakenDamage: false,
+		backgroundColor: 'white',
 		swordIsHidden: true,
 		swordDisplay: 'none',
 		swordDirection: 'rotate(0deg)',
@@ -35,8 +38,9 @@ class World1 extends Component {
 
 	componentDidUpdate() {
 		this.handleMapBoundries();
-		this.handleColorChange();//this is here for a collision detection test
-		//console.log(this.state.dataForUpdate.health);//this is here to test player health
+		this.handleColorChange();
+		this.handleTakingDamage();
+		console.log(this.state.dataForUpdate.health);//this is here to test player health
   }
 
 	async componentWillUnmount() {
@@ -73,32 +77,16 @@ class World1 extends Component {
 	handleKeyPress = (e) => {
     switch(e.keyCode) {
       case 37://Left
-				this.setState({
-					playerXPos: this.state.playerXPos - 2,
-					playerDirection: 'left'
-				});
-				this.handleTakingDamage();
+				this.handlePlayerMovment('left');
       break;
       case 39://Right
-				this.setState({
-					playerXPos: this.state.playerXPos + 2,
-					playerDirection: 'right'
-				});
-				this.handleTakingDamage();
+				this.handlePlayerMovment('right');
       break;
       case 38://Up
-				this.setState({
-					playerYPos: this.state.playerYPos - 2,
-					playerDirection: 'up'
-				});
-				this.handleTakingDamage();
+				this.handlePlayerMovment('up');
       break;
       case 40://Down
-				this.setState({
-					playerYPos: this.state.playerYPos + 2,
-					playerDirection: 'down'
-				});
-				this.handleTakingDamage();
+				this.handlePlayerMovment('down');
 			break;
 			case 70://Sword attack
 				this.setState({
@@ -109,6 +97,36 @@ class World1 extends Component {
 			break;
       default:
     }
+	}
+
+	handlePlayerMovment(direction) {
+		switch(direction) {
+      case 'left':
+				this.setState({
+					playerXPos: this.state.playerXPos - 2,
+					playerDirection: 'left'
+				});
+      break;
+      case 'right':
+				this.setState({
+					playerXPos: this.state.playerXPos + 2,
+					playerDirection: 'right'
+				});
+      break;
+      case 'up':
+				this.setState({
+					playerYPos: this.state.playerYPos - 2,
+					playerDirection: 'up'
+				});
+      break;
+      case 'down':
+				this.setState({
+					playerYPos: this.state.playerYPos + 2,
+					playerDirection: 'down'
+				});
+			break;
+      default:
+		}
 	}
 
 	handleKeyUp = (e) => {
@@ -126,29 +144,32 @@ class World1 extends Component {
 	}
 
 	handleCollisionWithMonster = (colliding) => {
-		this.setState({
-			isColliding: colliding
-		});
+		this.setState({isColliding: colliding});
+
+		if (colliding === false && this.state.hasTakenDamage === true) {
+			this.setState({hasTakenDamage: false});
+		}
 	}
 
-	//this is here for a collision detection test
 	handleColorChange() {
-		if (this.state.isColliding && this.state.backgroundColor !== 'purple') {
-			this.setState({backgroundColor: 'purple'});
+		if (this.state.isColliding && this.state.backgroundColor !== 'red') {
+			this.setState({backgroundColor: 'red'});
 		} else if (!this.state.isColliding && this.state.backgroundColor !== 'white') {
 			this.setState({backgroundColor: 'white'});
 		}
 	}
 
 	handleTakingDamage() {
-		if (this.state.isColliding === true) {
+		if (this.state.isColliding === true && this.state.hasTakenDamage === false) {
 			this.setState({
-				dataForUpdate: {health: this.state.dataForUpdate.health - 1}
+				dataForUpdate: {health: this.state.dataForUpdate.health - 1},
+				hasTakenDamage: true
 			});
 		}
 		
-		if (this.state.dataForUpdate.health <= 0) {
+		if (this.state.dataForUpdate.health <= 0 && this.state.gameOverDisplay !== 'block') {
 			document.removeEventListener('keydown', this.handleKeyPress);
+			document.removeEventListener('keyup', this.handleKeyUp);
 			this.setState({
 				gameOverDisplay: 'block'
 			});
@@ -227,7 +248,7 @@ class World1 extends Component {
 		let playerCoordinatesAndDamageColor = {
 			left: `${this.state.playerXPos}%`,
 			top: `${this.state.playerYPos}%`,
-			backgroundColor: this.state.backgroundColor //this is here for a collision detection test
+			backgroundColor: this.state.backgroundColor
 		}
 
 		let swordConfig = {
@@ -263,7 +284,7 @@ class World1 extends Component {
 					component={Monster}
 					playerXPos={this.state.playerXPos}
 					playerYPos={this.state.playerYPos}
-					color={'rgb(136, 0, 21)'}
+					backgroundColor={'rgb(136, 0, 21)'}
 					borderColor={'rgb(247, 82, 49)'}
 					handleCollisionWithMonster={this.handleCollisionWithMonster}
 					isColliding={this.state.isColliding}
