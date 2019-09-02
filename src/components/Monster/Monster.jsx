@@ -117,16 +117,16 @@ class Monster extends Component {
 
 		if (num1 === 0 && num2 === 0) {
 			this.setState({monsterYPos: this.state.monsterYPos - 2});
-			console.log('Moving Up');
+			// console.log('Moving Up');
 		} else if (num1 === 0 && num2 === 1) {
 			this.setState({monsterXPos: this.state.monsterXPos + 2});
-			console.log('Moving Right');
+			// console.log('Moving Right');
 		} else if (num1 === 1 && num2 === 1) {
 			this.setState({monsterYPos: this.state.monsterYPos + 2});
-			console.log('Moving Down');
+			// console.log('Moving Down');
 		} else if (num1 === 1 && num2 === 0) {
 			this.setState({monsterXPos: this.state.monsterXPos - 2});
-			console.log('Moving Left');
+			// console.log('Moving Left');
 		}
 	}
 

@@ -6,9 +6,7 @@ import ComponentMapper from '../../utilities/ComponentMapper';
 import styles from './World1.module.css';
 
 let monstersArray = [
-	{id: 0, name: 'Monster 1'},
-	{id: 1, name: 'Monster 2'},
-	{id: 2, name: 'Monster 3'}
+	{id: 0, name: 'Monster 1'}
 ];
 
 class World1 extends Component {
@@ -39,7 +37,6 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();
-		this.handleTakingDamage();
 		console.log(this.state.dataForUpdate.health);//this is here to test player health
   }
 
@@ -78,15 +75,19 @@ class World1 extends Component {
     switch(e.keyCode) {
       case 37://Left
 				this.handlePlayerMovment('left');
+				this.handleTakingDamage();
       break;
       case 39://Right
 				this.handlePlayerMovment('right');
+				this.handleTakingDamage();
       break;
       case 38://Up
 				this.handlePlayerMovment('up');
+				this.handleTakingDamage();
       break;
       case 40://Down
 				this.handlePlayerMovment('down');
+				this.handleTakingDamage();
 			break;
 			case 70://Sword attack
 				this.setState({
@@ -94,6 +95,7 @@ class World1 extends Component {
 				});
 				this.handleSwordDisplay();
 				this.handleSwordAttack();
+				this.handleTakingDamage();
 			break;
       default:
     }
@@ -145,10 +147,6 @@ class World1 extends Component {
 
 	handleCollisionWithMonster = (colliding) => {
 		this.setState({isColliding: colliding});
-
-		if (colliding === false && this.state.hasTakenDamage === true) {
-			this.setState({hasTakenDamage: false});
-		}
 	}
 
 	handleColorChange() {
@@ -160,10 +158,9 @@ class World1 extends Component {
 	}
 
 	handleTakingDamage() {
-		if (this.state.isColliding === true && this.state.hasTakenDamage === false) {
+		if (this.state.isColliding) {
 			this.setState({
-				dataForUpdate: {health: this.state.dataForUpdate.health - 1},
-				hasTakenDamage: true
+				dataForUpdate: {health: this.state.dataForUpdate.health - 1}
 			});
 		}
 		
