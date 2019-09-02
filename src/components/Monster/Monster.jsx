@@ -4,6 +4,7 @@ import styles from './Monster.module.css';
 class Monster extends Component {
 
 	state = {
+		health: 10,
 		monsterXPos: '',
 		monsterYPos: '',
 		w: 16, //this is in state in case I want to control the size of the monsters
@@ -105,6 +106,8 @@ class Monster extends Component {
 			if (xDistance <= 2 && yDistance <= 2 && this.state.isBeingAttacked !== true) {
 				this.setState({isBeingAttacked: true});
 				this.moveMonster();
+				this.handleTakingDamage();
+				console.log(this.state.health);
 			}
 		} else if (this.props.tipOfSwordX === null && this.props.tipOfSwordY === null && this.state.isBeingAttacked !== false) {
 			this.setState({isBeingAttacked: false});
@@ -128,6 +131,18 @@ class Monster extends Component {
 			this.setState({monsterXPos: this.state.monsterXPos - 2});
 			// console.log('Moving Left');
 		}
+	}
+
+	handleTakingDamage() {
+		this.setState({health: this.state.health - 1});
+		
+		// if (this.state.dataForUpdate.health <= 0 && this.state.gameOverDisplay !== 'block') {
+		// 	document.removeEventListener('keydown', this.handleKeyPress);
+		// 	document.removeEventListener('keyup', this.handleKeyUp);
+		// 	this.setState({
+		// 		gameOverDisplay: 'block'
+		// 	});
+		// }
 	}
 
 	render() {

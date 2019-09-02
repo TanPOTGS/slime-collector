@@ -1,7 +1,23 @@
-.World1Container {
+.OuterContainer {
 	position: relative;
 	border: 10px double white;
 	width: fit-content;
+}
+.InnerContainer {
+	display: flex;
+	align-items: flex-start;
+}
+.HealthBoard {
+	border: 10px double white;
+	margin: 20px 20px 20px 0;
+	align-self: center;
+	width: 150px;
+	text-align: center;
+	padding: 10px;
+}
+.PlayerHealth {
+	display: inline-block;
+	margin: 5px;
 }
 .BackToHarvestPage {
 	position: absolute;

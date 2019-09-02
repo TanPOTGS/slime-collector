@@ -6,7 +6,10 @@ import ComponentMapper from '../../utilities/ComponentMapper';
 import styles from './World1.module.css';
 
 let monstersArray = [
-	{id: 0, name: 'Monster 1'}
+	{id: 0, name: 'Monster 1'},
+	{id: 1, name: 'Monster 2'},
+	{id: 2, name: 'Monster 3'},
+	{id: 3, name: 'Monster 4'}
 ];
 
 class World1 extends Component {
@@ -37,7 +40,7 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();
-		console.log(this.state.dataForUpdate.health);//this is here to test player health
+		//console.log(this.state.dataForUpdate.health);//this is here to test player health
   }
 
 	async componentWillUnmount() {
@@ -96,10 +99,15 @@ class World1 extends Component {
 				this.handleSwordDisplay();
 				this.handleSwordAttack();
 				this.handleTakingDamage();
+				// this.testFunction();
 			break;
       default:
     }
 	}
+
+	// testFunction() {
+	// 	monstersArray.splice(3, 1);
+	// }
 
 	handlePlayerMovment(direction) {
 		switch(direction) {
@@ -258,7 +266,7 @@ class World1 extends Component {
 		}
 
 		return (
-			<div className={styles.World1Container}>
+			<div className={styles.OuterContainer}>
 
 				<NavLink 
 				exact 
@@ -268,27 +276,36 @@ class World1 extends Component {
 					<span className={styles.Close}>&times;</span>
 				</NavLink>
 
-				<div className={styles.World1}>
+				<div className={styles.InnerContainer}>
 
-					<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
+					<div className={styles.World1}>
 
-					<div className={styles.PlayerBlock} style={playerCoordinatesAndDamageColor}>
-						<div className={styles.PlayerSword} style={swordConfig}></div>
+						<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
+
+						<div className={styles.PlayerBlock} style={playerCoordinatesAndDamageColor}>
+							<div className={styles.PlayerSword} style={swordConfig}></div>
+						</div>
+
+						<ComponentMapper 
+						array={monstersArray} 
+						component={Monster}
+						playerXPos={this.state.playerXPos}
+						playerYPos={this.state.playerYPos}
+						backgroundColor={'rgb(136, 0, 21)'}
+						borderColor={'rgb(247, 82, 49)'}
+						handleCollisionWithMonster={this.handleCollisionWithMonster}
+						isColliding={this.state.isColliding}
+						tipOfSwordX={this.state.tipOfSwordX}
+						tipOfSwordY={this.state.tipOfSwordY}
+						swordIsHidden={this.state.swordIsHidden}
+						/>
 					</div>
 
-					<ComponentMapper 
-					array={monstersArray} 
-					component={Monster}
-					playerXPos={this.state.playerXPos}
-					playerYPos={this.state.playerYPos}
-					backgroundColor={'rgb(136, 0, 21)'}
-					borderColor={'rgb(247, 82, 49)'}
-					handleCollisionWithMonster={this.handleCollisionWithMonster}
-					isColliding={this.state.isColliding}
-					tipOfSwordX={this.state.tipOfSwordX}
-					tipOfSwordY={this.state.tipOfSwordY}
-					swordIsHidden={this.state.swordIsHidden}
-					/>
+					<div className={styles.HealthBoard}>
+						<span>--Health--</span>
+						<span className={styles.PlayerHealth}>Player:{this.state.dataForUpdate.health}</span>
+					</div>
+
 				</div>
 
 			</div>
