@@ -12,7 +12,10 @@ class Monster extends Component {
 		isColliding: false,
 		isBeingAttacked: false,
 		backgroundColor: this.props.backgroundColor,
-		borderColor: this.props.borderColor
+		borderColor: this.props.borderColor,
+		healthBarIsHidden: true,
+		healthBarDisplay: 'none',
+		lengthOfHealthBar: 16
 	}
 
 	componentDidMount() {
@@ -135,7 +138,65 @@ class Monster extends Component {
 
 	handleTakingDamage() {
 		this.setState({health: this.state.health - 1});
+
+		if (this.state.healthBarIsHidden) {
+			this.setState({healthBarIsHidden: false, healthBarDisplay: 'block'});
+		}
 		
+		switch(this.state.health) {
+      case 9:
+				this.setState({
+					lengthOfHealthBar: 14.4
+				});
+      break;
+      case 8:
+				this.setState({
+					lengthOfHealthBar: 12.8
+				});
+      break;
+      case 7:
+				this.setState({
+					lengthOfHealthBar: 11.2
+				});
+			break;
+			case 6:
+				this.setState({
+					lengthOfHealthBar: 9.6
+				});
+			break;
+			case 5:
+				this.setState({
+					lengthOfHealthBar: 8
+				});
+			break;
+			case 4:
+				this.setState({
+					
+					lengthOfHealthBar: 6.4
+				});
+			break;
+			case 3:
+				this.setState({
+					lengthOfHealthBar: 4.8
+				});
+			break;
+			case 2:
+				this.setState({
+					lengthOfHealthBar: 3.6
+				});
+			break;
+			case 1:
+				this.setState({
+					lengthOfHealthBar: 1.6
+				});
+			break;
+			case 0:
+				this.setState({
+					lengthOfHealthBar: 0
+				});
+			break;
+      default:
+		}
 		// if (this.state.dataForUpdate.health <= 0 && this.state.gameOverDisplay !== 'block') {
 		// 	document.removeEventListener('keydown', this.handleKeyPress);
 		// 	document.removeEventListener('keyup', this.handleKeyUp);
@@ -155,9 +216,15 @@ class Monster extends Component {
 			backgroundColor: this.state.backgroundColor,
 			borderColor: this.state.borderColor
 		}
+		let healthBar = {
+			display: this.state.healthBarDisplay,
+			width: `${this.state.lengthOfHealthBar}px`
+		}
 
 		return(
-			<div className={styles.Monster} style={monsterPosAndDim}></div>
+			<div className={styles.Monster} style={monsterPosAndDim}>
+				<div className={styles.HealthBar} style={healthBar}></div>
+			</div>
 		);
 	}
 }
