@@ -5,13 +5,6 @@ import playerService from '../../utilities/playerService';
 import ComponentMapper from '../../utilities/ComponentMapper';
 import styles from './World1.module.css';
 
-let monstersArray = [
-	{id: 0, name: 'Monster 1'},
-	{id: 1, name: 'Monster 2'},
-	{id: 2, name: 'Monster 3'},
-	{id: 3, name: 'Monster 4'}
-];
-
 class World1 extends Component {
 
 	state = {
@@ -27,6 +20,12 @@ class World1 extends Component {
 		tipOfSwordX: null,
 		tipOfSwordY: null,
 		gameOverDisplay: 'none',
+		monstersArray: [
+			{id: 0},
+			{id: 1},
+			{id: 2},
+			{id: 3}
+		],
 		dataForUpdate: {
 			health: this.props.player.health
 		}
@@ -40,7 +39,6 @@ class World1 extends Component {
 	componentDidUpdate() {
 		this.handleMapBoundries();
 		this.handleColorChange();
-		//console.log(this.state.dataForUpdate.health);//this is here to test player health
   }
 
 	async componentWillUnmount() {
@@ -99,15 +97,17 @@ class World1 extends Component {
 				this.handleSwordDisplay();
 				this.handleSwordAttack();
 				this.handleTakingDamage();
-				// this.testFunction();
 			break;
       default:
     }
 	}
 
-	// testFunction() {
-	// 	monstersArray.splice(3, 1);
-	// }
+	removeMonsterFromArray = (id) => {
+		let newMonstersArray = this.state.monstersArray;
+		let newIndex = newMonstersArray.findIndex(obj => obj.id === id)
+		newMonstersArray.splice(newIndex, 1);
+		this.setState({monstersArray: newMonstersArray});
+	}
 
 	handlePlayerMovment(direction) {
 		switch(direction) {
@@ -287,13 +287,14 @@ class World1 extends Component {
 						</div>
 
 						<ComponentMapper 
-						array={monstersArray} 
+						array={this.state.monstersArray} 
 						component={Monster}
 						playerXPos={this.state.playerXPos}
 						playerYPos={this.state.playerYPos}
 						backgroundColor={'rgb(136, 0, 21)'}
 						borderColor={'rgb(247, 82, 49)'}
 						handleCollisionWithMonster={this.handleCollisionWithMonster}
+						removeMonsterFromArray={this.removeMonsterFromArray}
 						isColliding={this.state.isColliding}
 						tipOfSwordX={this.state.tipOfSwordX}
 						tipOfSwordY={this.state.tipOfSwordY}

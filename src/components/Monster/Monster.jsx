@@ -110,7 +110,6 @@ class Monster extends Component {
 				this.setState({isBeingAttacked: true});
 				this.moveMonster();
 				this.handleTakingDamage();
-				console.log(this.state.health);
 			}
 		} else if (this.props.tipOfSwordX === null && this.props.tipOfSwordY === null && this.state.isBeingAttacked !== false) {
 			this.setState({isBeingAttacked: false});
@@ -194,16 +193,10 @@ class Monster extends Component {
 				this.setState({
 					lengthOfHealthBar: 0
 				});
+				this.props.removeMonsterFromArray(this.props.id);
 			break;
       default:
 		}
-		// if (this.state.dataForUpdate.health <= 0 && this.state.gameOverDisplay !== 'block') {
-		// 	document.removeEventListener('keydown', this.handleKeyPress);
-		// 	document.removeEventListener('keyup', this.handleKeyUp);
-		// 	this.setState({
-		// 		gameOverDisplay: 'block'
-		// 	});
-		// }
 	}
 
 	render() {
