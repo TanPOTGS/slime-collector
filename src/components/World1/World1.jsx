@@ -173,11 +173,7 @@ class World1 extends Component {
 		}
 		
 		if (this.state.dataForUpdate.health <= 0 && this.state.gameOverDisplay !== 'block') {
-			document.removeEventListener('keydown', this.handleKeyPress);
-			document.removeEventListener('keyup', this.handleKeyUp);
-			this.setState({
-				gameOverDisplay: 'block'
-			});
+			this.handleGameOver();
 		}
 	}
 
@@ -192,6 +188,10 @@ class World1 extends Component {
 			});
 		}
 
+		this.handleSwordDirection();
+	}
+
+	handleSwordDirection() {
 		switch(this.state.playerDirection) {
       case 'right':
 				this.setState({
@@ -246,6 +246,14 @@ class World1 extends Component {
 			break;
       default:
 		}		
+	}
+
+	handleGameOver() {
+		document.removeEventListener('keydown', this.handleKeyPress);
+		document.removeEventListener('keyup', this.handleKeyUp);
+		this.setState({
+			gameOverDisplay: 'block'
+		});
 	}
 
 	render() {
