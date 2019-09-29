@@ -62,3 +62,15 @@
 	background-color: black;
 	color: white;
 }
+.StageCleared {
+	position: absolute;
+	border: 10px double white;
+	width: 180px;
+	height: 90px;
+	text-align: center;
+	left: 30%;
+	top: 45%;
+	z-index: 1;
+	background-color: black;
+	color: white;
+}

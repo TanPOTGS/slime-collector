@@ -20,6 +20,7 @@ class World1 extends Component {
 		tipOfSwordX: null,
 		tipOfSwordY: null,
 		gameOverDisplay: 'none',
+		stageClearedDisplay: 'none',
 		monstersArray: [
 			{id: 0},
 			{id: 1},
@@ -107,6 +108,9 @@ class World1 extends Component {
 		let newIndex = newMonstersArray.findIndex(obj => obj.id === id)
 		newMonstersArray.splice(newIndex, 1);
 		this.setState({monstersArray: newMonstersArray});
+		if (this.state.monstersArray.length <= 0) {
+			this.handleStageClear();
+		}
 	}
 
 	handlePlayerMovment(direction) {
@@ -172,7 +176,7 @@ class World1 extends Component {
 			});
 		}
 		
-		if (this.state.dataForUpdate.health <= 0 && this.state.gameOverDisplay !== 'block') {
+		if (this.state.dataForUpdate.health <= 0) {
 			this.handleGameOver();
 		}
 	}
@@ -251,9 +255,21 @@ class World1 extends Component {
 	handleGameOver() {
 		document.removeEventListener('keydown', this.handleKeyPress);
 		document.removeEventListener('keyup', this.handleKeyUp);
-		this.setState({
-			gameOverDisplay: 'block'
-		});
+		if (this.state.gameOverDisplay !== 'block') {
+			this.setState({
+				gameOverDisplay: 'block'
+			});
+		}
+	}
+
+	handleStageClear() {
+		document.removeEventListener('keydown', this.handleKeyPress);
+		document.removeEventListener('keyup', this.handleKeyUp);
+		if (this.state.stageClearedDisplay !== 'block') {
+			this.setState({
+				stageClearedDisplay: 'block'
+			});
+		}
 	}
 
 	render() {
@@ -273,6 +289,10 @@ class World1 extends Component {
 			display: this.state.gameOverDisplay
 		}
 
+		let stageClearedDisplay = {
+			display: this.state.stageClearedDisplay
+		}
+
 		return (
 			<div className={styles.OuterContainer}>
 
@@ -289,6 +309,7 @@ class World1 extends Component {
 					<div className={styles.World1}>
 
 						<div className={styles.GameOver} style={gameOverDisplay}>YOU'VE BECOME TOO FATIGUED</div>
+						<div className={styles.StageCleared} style={stageClearedDisplay}>ALL AVAILABLE SLIME HAS BEEN HARVESTED!</div>
 
 						<div className={styles.PlayerBlock} style={playerCoordinatesAndDamageColor}>
 							<div className={styles.PlayerSword} style={swordConfig}></div>
