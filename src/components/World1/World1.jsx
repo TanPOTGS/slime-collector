@@ -108,6 +108,9 @@ class World1 extends Component {
 		let newIndex = newMonstersArray.findIndex(obj => obj.id === id)
 		newMonstersArray.splice(newIndex, 1);
 		this.setState({monstersArray: newMonstersArray});
+		if (this.state.isColliding) {
+			this.setState({isColliding: false});
+		}
 		if (this.state.monstersArray.length <= 0) {
 			this.handleStageClear();
 		}
